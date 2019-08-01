@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fitsSystemWindows="true">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusableInTouchMode="true"
+        android:layout_centerVertical="true"
+        android:background="#ffffff"
+        android:paddingTop="28dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp">
+        <!-- LOGO -->
+        <include
+            layout="@layout/logo_layout"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginBottom="50dp"/>
+
+        <!-- Username Label -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+            <EditText
+                android:id="@+id/login_user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:inputType="text"
+                android:hint="@string/login_form_user" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Password Label -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+            <EditText
+                android:id="@+id/login_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:inputType="textPassword"
+                android:hint="@string/login_form_pass" />
+            <!--
+            <TextView android:id="@+id/link_forgot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login_form_forgot"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="3dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="14sp"
+                android:onClick="goToRegister" />
+                -->
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Signup Button -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/prof_signup"
+            style="@style/FilledButtonPrimary"
+            android:text="@string/login_form_action"
+            android:onClick="loginUser"/>
+
+        <TextView android:id="@+id/link_register"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/login_form_not_reg"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:onClick="goToRegister"/>
+    </LinearLayout>
+</RelativeLayout>

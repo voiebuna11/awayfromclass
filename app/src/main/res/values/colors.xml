@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#00BCD4</color>
+    <color name="colorPrimaryLight">#1ae4ff</color>
+    <color name="colorPrimaryDark">#008799</color>
+    <color name="colorAccent">#009eb3</color>
+    <color name="colorBackground">#ffffff</color>
+    <color name="colorBlack">#000</color>
+    <color name="colorDefaultMenuGray">#5f6267</color>
+    <color name="colorDefaultMenuGrayLight">#9d9d9d</color>
+    <color name="chat_typebox_gray">#f2f3f5</color>
+    <color name="chat_message_from_gray">#f0f0f0</color>
+</resources>

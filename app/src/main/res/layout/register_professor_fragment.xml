@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusableInTouchMode="true"
+        android:paddingTop="28dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp">
+        <ImageView android:src="@drawable/professor_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="72dp"
+            android:layout_marginBottom="28dp"
+            android:layout_gravity="center_horizontal" />
+
+        <!-- Username Label -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+            <EditText
+                android:id="@+id/prof_user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:inputType="text"
+                android:hint="@string/register_form_user" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Email Label -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+            <EditText
+                android:id="@+id/prof_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:hint="@string/register_form_email" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Password Label -->
+        <com.google.android.material.textfield.TextInputLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+            <EditText
+                android:id="@+id/prof_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:hint="@string/register_form_pass"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!--  Lastname Label -->
+        <com.google.android.material.textfield.TextInputLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/backwithborder"
+            android:layout_marginBottom="8dp">
+            <EditText
+                android:id="@+id/prof_lastname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:inputType="text"
+                android:hint="@string/register_form_lname" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!--  Firstname Label -->
+        <com.google.android.material.textfield.TextInputLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/backwithborder"
+            android:layout_marginBottom="8dp">
+            <EditText
+                android:id="@+id/prof_firstname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:inputType="text"
+                android:hint="@string/register_form_fname" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!--  Phone Label -->
+        <com.google.android.material.textfield.TextInputLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/backwithborder"
+            android:layout_marginBottom="8dp">
+            <EditText
+                android:id="@+id/prof_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:inputType="phone"
+                android:hint="@string/register_form_phone" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!--  City Label -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/backwithborder"
+            android:layout_marginBottom="8dp">
+            <EditText
+                android:id="@+id/prof_city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:inputType="text"
+                android:hint="@string/register_form_city" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Signup Button -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/prof_signup"
+            style="@style/FilledButtonPrimary"
+            android:text="@string/register_form_action" />
+
+        <TextView android:id="@+id/link_login"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:text="@string/register_form_already"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:onClick="goToLogin"/>
+    </LinearLayout>
+</ScrollView>

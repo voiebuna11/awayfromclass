@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/message_layout_body"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="0dp">
+    <RelativeLayout
+        android:id="@+id/message_layout_line"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:paddingRight="5dp"
+        android:paddingLeft="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/message_layout_user_pic"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="3dp"
+            android:src="@drawable/professor_logo"
+            android:layout_alignBottom="@+id/message_layout_text"
+            android:visibility="invisible"/>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_toRightOf="@+id/message_layout_user_pic"
+            android:id="@+id/message_layout_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
+            android:textSize="16sp"
+            android:textColor="@color/colorBackground"
+            android:background="@drawable/message_from_user_middle_layout"
+            android:text="Message "/>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

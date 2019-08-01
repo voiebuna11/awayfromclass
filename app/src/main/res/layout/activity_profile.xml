@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/drawerLayout"
+    tools:context=".activities.EmptyActivity">
+    <include layout="@layout/loading_bar_layout" android:layout_width="match_parent" android:layout_height="match_parent"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include layout="@layout/top_menu_transparent_layout" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:fitsSystemWindows="true">
+                <RelativeLayout
+                    android:id="@+id/profile_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:elevation="3dp">
+                    <ImageView
+                        android:id="@+id/profile_header_background"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/profile_header_background"
+                        android:scaleType="centerCrop" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/profile_header_background"
+                        android:padding="25dp">
+                        <ImageView
+                            android:id="@+id/profile_header_avatar"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/user_avatar"/>
+                        <TextView
+                            android:id="@+id/profile_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:text="Numerele Marcel"
+                            android:textSize="24sp"
+                            android:gravity="center"
+                            android:textColor="#fff"/>
+                    </RelativeLayout>
+                </RelativeLayout>
+                <LinearLayout
+                    android:layout_below="@+id/profile_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/profile_user"
+                        style="@style/ImageButtonBottomBordered"
+                        android:drawableLeft="@drawable/ic_btn_user"
+                        android:text="username" />
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/profile_phone"
+                        style="@style/ImageButtonBottomBordered"
+                        android:drawableLeft="@drawable/ic_btn_phone"
+                        android:text="(+40) 0762190393"
+                        android:onClick="callUser"
+                        tools:ignore="OnClick" />
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/profile_email"
+                        style="@style/ImageButtonBottomBordered"
+                        android:drawableLeft="@drawable/ic_btn_mail_contact"
+                        android:text="aabbbcccc@example.dom"
+                        android:onClick="sendMailUser"
+                        tools:ignore="OnClick" />
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/profile_city"
+                        style="@style/ImageButtonBottomBordered"
+                        android:drawableLeft="@drawable/ic_btn_city"
+                        android:text="City / Locality" />
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/profile_group"
+                        style="@style/ImageButtonBottomBordered"
+                        android:drawableLeft="@drawable/ic_btn_year"
+                        android:text="SPEC X" />
+                </LinearLayout>
+            </RelativeLayout>
+        </ScrollView>
+    </RelativeLayout>
+    <include layout="@layout/side_menu_layout" />
+</androidx.drawerlayout.widget.DrawerLayout>

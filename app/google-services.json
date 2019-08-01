@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "525825436996",
+    "firebase_url": "https://away-from-class.firebaseio.com",
+    "project_id": "away-from-class",
+    "storage_bucket": "away-from-class.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:525825436996:android:4ec1acfeded5a2e0",
+        "android_client_info": {
+          "package_name": "com.example.afc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "525825436996-mm798hkdofuvodmk8lfmunlcqme1e8j7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7ysbN6Hgo4zrU3OyE7zUv4d2--AP6rcc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "525825436996-mm798hkdofuvodmk8lfmunlcqme1e8j7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:525825436996:android:d7c73782438f3d2f",
+        "android_client_info": {
+          "package_name": "com.example.notifandchatapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "525825436996-mm798hkdofuvodmk8lfmunlcqme1e8j7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7ysbN6Hgo4zrU3OyE7zUv4d2--AP6rcc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "525825436996-mm798hkdofuvodmk8lfmunlcqme1e8j7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

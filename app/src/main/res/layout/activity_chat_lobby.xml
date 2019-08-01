@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/drawerLayout"
+    tools:context=".chat.ChatLobbyActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <include layout="@layout/top_menu_layout" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+        <include layout="@layout/loading_bar_layout" android:layout_width="match_parent" android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/chat_lobby_empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/chat_lobby_empty"
+            android:gravity="center"
+            android:visibility="gone"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ScrollView
+                android:id="@+id/chat_room_chat_box"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/chat_room_bottom_menu">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:fitsSystemWindows="true">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/chat_lobby_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#fff"
+                        android:focusableInTouchMode="true"/>
+                </LinearLayout>
+            </ScrollView>
+        </RelativeLayout>
+    </LinearLayout>
+    <include layout="@layout/side_menu_layout" />
+</androidx.drawerlayout.widget.DrawerLayout>

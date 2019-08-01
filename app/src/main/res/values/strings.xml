@@ -1,0 +1,74 @@
+<resources>
+    <string name="app_name">Away From Class</string>
+    <string name="app_quote">Study first, play afterwards</string>
+
+    <string name="user_std">Student</string>
+    <string name="user_prof">Profesor</string>
+
+    <string name="app_intent_mail">Trimite mail</string>
+    <string-array name="query_suggestions">
+        <item>Android</item>
+        <item>iOS</item>
+        <item>SCALA</item>
+    </string-array>
+
+    <string name="sidemenu_open">Open</string>
+    <string name="sidemenu_close">Close</string>
+    <string name="sidemenu_main">Pagina principal&#259;</string>
+    <string name="sidemenu_courses">Cursurile mele</string>
+    <string name="sidemenu_notifications">Notific&#259;ri</string>
+    <string name="sidemenu_messages">Mesaje</string>
+    <string name="sidemenu_myfiles">Fi&#537;ierele mele</string>
+    <string name="sidemenu_settings">Set&#259;ri</string>
+    <string name="sidemenu_logout">Deconectare</string>
+
+    <string name="topmenu_search_hint">C&#259;uta&#539;i &#238;n Away From Class</string>
+
+    <string name="progress_loading">Se &#238;ncarc&#259;..</string>
+    <string name="progress_login">Autentificare..</string>
+    <string name="progress_register">Se &#238;nregistreaz&#259; datele..</string>
+
+    <string name="alert_error_title">A ap&#259;rut o eroare</string>
+    <string name="alert_error_sent_data">Unele date nu s-au trimis corect la server.</string>
+    <string name="alert_wrong_account_title">Nume sau parol&#259; gre&#537;it&#259;</string>
+    <string name="alert_wrong_account_message">Datele introduse de dvs. sunt incorecte!</string>
+    <string name="alert_regex_title">Format incorect</string>
+    <string name="alert_regex_user_message">Numele de utilizator poate con&#539;ine doar litere, cifre si \"_\". Minim 5 caractere.</string>
+    <string name="alert_regex_password_message">Parola poate con&#539;ine doar litere, cifre si \"_\". Minim 5 caractere.</string>
+    <string name="alert_regex_email_message">Adresa de e-mail introdus&#259; nu respect&#259; formatul impus.</string>
+    <string name="alert_regex_lname_message">Numele trebuie s&#259; con&#539;in&#259; minim 3 litere &#537;i spa&#539;ii.</string>
+    <string name="alert_regex_fname_message">Prenumele trebuie s&#259; con&#539;in&#259; minim 3 litere &#537;i spa&#539;ii.</string>
+    <string name="alert_regex_city_message">Ora&#537;ul trebuie s&#259; con&#539;in&#259; minim 3 litere &#537;i spa&#539;ii.</string>
+    <string name="alert_regex_phone_message">Num&#259;rul de telefon poate con&#539;ine doar cifre.</string>
+    <string name="alert_regex_year_message">Anul de studiu poate con&#539;ine doar o cifr&#259;.</string>
+    <string name="alert_regex_spec_message">Specializarea poate con&#539;ine doar minim 3 litere.</string>
+    <string name="alert_button_tryagain">&#206;ncearc&#259; din nou</string>
+    <string name="alert_button_ok">Ok</string>
+
+    <string name="title_activity_register">RegisterActivity</string>
+    <string name="register_success">Contul a fost &#238;nregistrat cu succes!</string>
+    <string name="register_already">Numele de utilizator sau adresa de email sunt deja folosite.</string>
+    <string name="register_form_lname">Nume</string>
+    <string name="register_form_fname">Prenume</string>
+    <string name="register_form_email">Adresa de e-mail</string>
+    <string name="register_form_user">Nume de utilizator</string>
+    <string name="register_form_pass">Parola</string>
+    <string name="register_form_action">&#206;nregistrare</string>
+    <string name="register_form_already"><u>Ai deja un cont? Autentific&#259;-te!</u></string>
+    <string name="register_form_city">Ora&#537;/Localitate</string>
+    <string name="register_form_year">An de studiu</string>
+    <string name="register_form_spec">Specializare</string>
+    <string name="register_form_phone"><u>Num&#259;r de telefon</u></string>
+
+    <string name="login_form_user">Nume de utilizator</string>
+    <string name="login_form_pass">Parola</string>
+    <string name="login_form_forgot"><u>Mi-am uitat parola</u></string>
+    <string name="login_form_action">Autentificare</string>
+    <string name="login_form_not_reg"><u>Nu ai cont? &#206;nregistreaz&#259;-te acum!</u></string>
+
+    <string name="chat_room_mess_box_hint">Aa</string>
+    <string name="chat_room_write_message">Scrie un mesaj...</string>
+
+    <string name="chat_lobby_empty">Nu s-a g&#259;sit nici o conversa&#539;ie deschis&#259;.</string>
+    <string name="inter_dot">&#183;</string>
+</resources>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/top_menu_layout_transparent"
+    android:elevation="4dp"
+    android:background="@android:color/transparent"
+    android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
+    app:contentInsetLeft="0dp"
+    app:contentInsetStart="0dp"
+    app:contentInsetStartWithNavigation="0dp">
+</androidx.appcompat.widget.Toolbar>

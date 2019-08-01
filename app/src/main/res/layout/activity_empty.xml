@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/drawerLayout"
+    tools:context=".activities.EmptyActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <include layout="@layout/top_menu_layout" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+        <include layout="@layout/loading_bar_layout" android:layout_width="match_parent" android:layout_height="match_parent"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="This is the empty activity"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Clear table"
+            android:onClick="clearTable"/>
+    </LinearLayout>
+    <include layout="@layout/side_menu_layout"/>
+</androidx.drawerlayout.widget.DrawerLayout>
