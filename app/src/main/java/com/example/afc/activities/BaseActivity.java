@@ -30,6 +30,7 @@ import com.example.afc.app.Config;
 import com.example.afc.app.DBManagement;
 import com.example.afc.app.SessionManagement;
 import com.example.afc.chat.ChatLobbyActivity;
+import com.example.afc.main.MainActivity;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.HashMap;

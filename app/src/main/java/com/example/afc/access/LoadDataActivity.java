@@ -21,7 +21,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.example.afc.R;
-import com.example.afc.activities.MainActivity;
+import com.example.afc.main.MainActivity;
 import com.example.afc.app.Config;
 import com.example.afc.app.SessionManagement;
 import com.google.android.gms.tasks.OnSuccessListener;

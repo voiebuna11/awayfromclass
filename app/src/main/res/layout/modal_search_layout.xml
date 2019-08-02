@@ -4,23 +4,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:background="@android:color/transparent">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:paddingRight="15dp"
             android:paddingLeft="15dp"
             android:gravity="center_vertical"
-            android:background="@drawable/semi_round_frame_layout"
+            android:background="@drawable/main_search_layout"
             android:orientation="horizontal">
             <com.example.afc.classes.CustomDrawerButton
                 android:id="@+id/search_toggle_btn"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:background="@drawable/ic_menu_toggle"/>
+                android:background="@drawable/ic_search_dialog_toggle"/>
             <com.example.afc.classes.CustomEditText
                 android:id="@+id/search_box"
                 android:imeOptions="actionSearch"
@@ -35,6 +38,7 @@
                 android:hint="@string/topmenu_search_hint"
                 android:background="@android:color/transparent"
                 android:layout_weight="1"/>
+
             <com.example.afc.classes.CustomDrawerButton
                 android:id="@+id/search_record_btn"
                 android:layout_width="24dp"
@@ -42,4 +46,13 @@
                 android:layout_gravity="right"
                 android:background="@drawable/ic_menu_microphone"/>
         </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/suggestion_list"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:focusableInTouchMode="true"
+            android:background="#fff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 </LinearLayout>

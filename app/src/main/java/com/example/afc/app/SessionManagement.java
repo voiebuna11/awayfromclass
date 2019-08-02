@@ -14,7 +14,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.afc.access.LoginActivity;
-import com.example.afc.activities.MainActivity;
+import com.example.afc.main.MainActivity;
 
 import java.util.HashMap;
 import java.util.Map;

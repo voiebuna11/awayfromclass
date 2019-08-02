@@ -13,7 +13,7 @@ public class Config {
     public static final int NOTIFICATION_ID_BIG_IMAGE = 101;
 
     // link to server files
-    public static final String KEY_LINK = "http://a137d5d8.ngrok.io";
+    public static final String KEY_LINK = "http://f27ea918.ngrok.io";
 
     // Sharedpref file name
     public static final String PREF_NAME = "AFCPref";
@@ -38,4 +38,5 @@ public class Config {
 
     public static final String DB_NAME = "afc_escanor.db";
     public static final String DB_CHAT_TABLE = "chat_messages";
+    public static final String DB_SEARCH_HISTORY_TABLE = "search_history";
 }
