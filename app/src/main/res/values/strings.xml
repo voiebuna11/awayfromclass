@@ -70,5 +70,9 @@
     <string name="chat_room_write_message">Scrie un mesaj...</string>
 
     <string name="chat_lobby_empty">Nu s-a g&#259;sit nici o conversa&#539;ie deschis&#259;.</string>
+
+    <string name="main_last_title">Utilizatori noi</string>
+    <string name="main_last_subtitle">Cele mai recente &#238;nregistr&#259;ri</string>
+
     <string name="inter_dot">&#183;</string>
 </resources>

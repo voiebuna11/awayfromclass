@@ -6,13 +6,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.afc.R;
 import com.example.afc.app.User;
@@ -47,11 +48,11 @@ public class ProfileActivity extends BaseTransparentActionBarActivity {
         String name = mUser.getLname() + " " + mUser.getFname();
         String group = mUser.getSpec() + " " + mUser.getYear();
 
-        final ImageView userPic = (ImageView) findViewById(R.id.profile_header_avatar);
+        final AppCompatImageView userPic = (AppCompatImageView) findViewById(R.id.profile_header_avatar);
         Glide.with(getApplicationContext())
                 .load(url)
-                .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-                .apply(RequestOptions.circleCropTransform())
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                .apply(RequestOptions.bitmapTransform(new RoundedCorners(14)))
                 .into(userPic);
 
         userNamePrf.setText(name);

@@ -5,14 +5,12 @@ import android.animation.ValueAnimator;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.InsetDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,29 +26,44 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.afc.R;
 import com.example.afc.activities.BaseActivity;
-import com.example.afc.activities.EmptyActivity;
-import com.example.afc.chat.ChatRoomActivity;
+import com.example.afc.app.Config;
+import com.example.afc.app.User;
 import com.example.afc.classes.CustomDrawerButton;
 import com.example.afc.classes.CustomEditText;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends BaseActivity {
     RequestQueue mQueue;
     InputMethodManager imm;
 
     ArrayList<String> searchSuggestions;
+    ArrayList<User> mLastUsersList;
+
     RecyclerView.LayoutManager mSearchLayoutManager;
     RecyclerView.Adapter mSearchAdapter;
+    RecyclerView.Adapter mLastAdapter;
 
     CustomDrawerButton customToggleBtn;
     CustomEditText mSearchBox;
     CustomDrawerButton mBackSearchBtn;
-    RecyclerView mRecyclerSuggestionList;
+    RecyclerView mSuggestionsView;
+    RecyclerView mLastUsersView;
 
     ValueAnimator transformAnimation;
     ValueAnimator transformBackAnimation;
@@ -60,19 +73,78 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mLastUsersView = (RecyclerView) findViewById(R.id.last_users_list);
+
         imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
         mQueue = Volley.newRequestQueue(getApplicationContext());
         mRotateAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotation);
 
         searchSuggestions = new ArrayList<String>();
+        mLastUsersList = new ArrayList<User>();
+
         searchSuggestions = db.getSearchHistory("");
-
-
+        jsonParseLastUsers();
         configureSideMenu();
         configureToolbar();
         configureSearch();
+    }
 
-        stopLoadingBar();
+    private void jsonParseLastUsers() {
+        startLoadingBar();
+        String url = session.getAFCLink() + "/afc/user/get_last_registered_users.php";
+        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                try {
+                    JSONObject j = new JSONObject(response);
+                    JSONArray jsonArray = j.getJSONArray("user_list");
+
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject intermediar = jsonArray.getJSONObject(i);
+
+                        mLastUsersList.add(new User(
+                                intermediar.getString("id"),
+                                intermediar.getString("type"),
+                                intermediar.getString("user"),
+                                intermediar.getString("email"),
+                                intermediar.getString("fname"),
+                                intermediar.getString("lname"),
+                                intermediar.getString("city"),
+                                intermediar.getString("phone"),
+                                intermediar.getString("year"),
+                                intermediar.getString("spec"),
+                                intermediar.getString("pic"),
+                                intermediar.getString("chat_id")
+                        ));
+                    }
+                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), RecyclerView.HORIZONTAL, false);
+                    mLastUsersView.setLayoutManager(layoutManager);
+
+                    mLastAdapter = new RecyclerLastUserListAdapter(getApplicationContext(), mLastUsersList, MainActivity.this);
+                    mLastUsersView.setAdapter(mLastAdapter);
+
+                    stopLoadingBar();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    alert(e.toString());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String, String> params = new HashMap<>();
+                params.put("request", sessionData.get(Config.KEY_ID)); //parametrii POST
+                return params;
+            }
+        };
+        mQueue.add(request);
     }
 
     public void configureSearch(){
@@ -86,8 +158,8 @@ public class MainActivity extends BaseActivity {
 
         mSearchBox = (CustomEditText) view.findViewById(R.id.search_box);
         mBackSearchBtn = (CustomDrawerButton) view.findViewById(R.id.search_toggle_btn);
-        mRecyclerSuggestionList = (RecyclerView) view.findViewById(R.id.suggestion_list);
-        mRecyclerSuggestionList.setHasFixedSize(true);
+        mSuggestionsView = (RecyclerView) view.findViewById(R.id.suggestion_list);
+        mSuggestionsView.setHasFixedSize(true);
 
         transformAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), R.drawable.ic_search_dialog_toggle, R.drawable.ic_search_dialog_back);
         transformAnimation.setDuration(600);
@@ -118,7 +190,7 @@ public class MainActivity extends BaseActivity {
                     hideSearchDialog();
                     v.setText("");
 
-                    Log.e("SAVED INTO history: ", search);
+                    //Log.e("SAVED INTO history: ", search);
                     return true;
                 }
                 return false;
@@ -135,18 +207,17 @@ public class MainActivity extends BaseActivity {
                 searchSuggestions.clear();
                 searchSuggestions = db.getSearchHistory(s.toString());
 
-                refreshSuggestionList();
-                mSearchAdapter.notifyDataSetChanged();
+                setRecyclerList(mSuggestionsView, mSearchLayoutManager, mSearchAdapter, searchSuggestions);
 
                 if(searchSuggestions.size() > 0){
-                    Log.e("RELOADED history: ", searchSuggestions.get(0));
+                    //Log.e("RELOADED history: ", searchSuggestions.get(0));
                 }
             }
         });
 
         searchDialog.setContentView(view);
     }
-    //functia pt meniu principal
+
     public void showSearchDialog(View view){
         if(searchDialog.isShowing()) return;
 
@@ -157,7 +228,7 @@ public class MainActivity extends BaseActivity {
         window.setBackgroundDrawable(inset);
         window.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
 
-        refreshSuggestionList();
+        setRecyclerList(mSuggestionsView, mSearchLayoutManager, mSearchAdapter, searchSuggestions);
 
         customToggleBtn.setAnimation(mRotateAnimation);
         transformAnimation.start();
@@ -199,26 +270,17 @@ public class MainActivity extends BaseActivity {
         });
     }
 
-    private void refreshSuggestionList(){
-        mSearchLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
-        mRecyclerSuggestionList.setLayoutManager(mSearchLayoutManager);
-        mSearchAdapter = new RecyclerSuggestionListAdapter(getApplicationContext(), searchSuggestions);
-        mRecyclerSuggestionList.setAdapter(mSearchAdapter);
+    private void setRecyclerList(RecyclerView recyclerView, RecyclerView.LayoutManager layoutManager, RecyclerView.Adapter adapter, ArrayList arrayList){
+        layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+        adapter = new RecyclerSuggestionListAdapter(getApplicationContext(), arrayList);
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
     private void hideSearchDialog(){
         imm.hideSoftInputFromWindow(mSearchBox.getWindowToken(), 0);
         searchDialog.dismiss();
-    }
-
-    public void goToEmpty(View view) {
-        Intent intent = new Intent(getBaseContext(), EmptyActivity.class);
-        startActivity(intent);
-    }
-
-    public void goToChatRoom(View view) {
-        Intent intent = new Intent(getApplicationContext(), ChatRoomActivity.class);
-        startActivity(intent);
     }
 
     @Override

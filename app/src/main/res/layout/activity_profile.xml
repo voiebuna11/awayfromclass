@@ -31,22 +31,23 @@
                         android:layout_height="wrap_content"
                         android:src="@drawable/profile_header_background"
                         android:scaleType="centerCrop" />
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/profile_header_avatar"
+                        android:transitionName="profile_pic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="130dp"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/user_avatar"/>
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_alignBottom="@+id/profile_header_background"
                         android:padding="25dp">
-                        <ImageView
-                            android:id="@+id/profile_header_avatar"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_centerVertical="true"
-                            android:src="@drawable/user_avatar"/>
                         <TextView
                             android:id="@+id/profile_name"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
-                            android:text="Numerele Marcel"
+                            android:text="Lastname Firstname"
                             android:textSize="24sp"
                             android:gravity="center"
                             android:textColor="#fff"/>

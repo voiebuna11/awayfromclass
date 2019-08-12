@@ -27,7 +27,7 @@ public class DBManagement extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + DB_CHAT_TABLE + " (mess_id	INTEGER PRIMARY KEY AUTOINCREMENT, mess_to_id INTEGER, mess_from_id INTEGER, mess_text TEXT, mess_date DATE);");
-        db.execSQL("CREATE TABLE " + DB_SEARCH_HISTORY_TABLE + " (search_id INTEGER PRIMARY KEY AUTOINCREMENT, search_text TEXT);");
+        db.execSQL("CREATE TABLE " + DB_SEARCH_HISTORY_TABLE + " (search_id INTEGER PRIMARY KEY AUTOINCREMENT, search_text TEXT UNIQUE);");
     }
 
     @Override
@@ -51,7 +51,7 @@ public class DBManagement extends SQLiteOpenHelper {
 
         ContentValues contentValues = new ContentValues();
         contentValues.put("search_text", text);
-        db.insert(DB_SEARCH_HISTORY_TABLE, null, contentValues);
+        db.replace(DB_SEARCH_HISTORY_TABLE, null, contentValues);
         return true;
     }
 
