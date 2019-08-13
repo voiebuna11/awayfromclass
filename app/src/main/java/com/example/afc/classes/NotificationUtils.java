@@ -77,12 +77,11 @@ public class NotificationUtils {
             if (imageUrl != null && imageUrl.length() > 4 && Patterns.WEB_URL.matcher(imageUrl).matches()) {
 
                 Bitmap bitmap = getBitmapFromURL(imageUrl);
-                Bitmap test = getBitmapFromURL("https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png");
 
                 if (bitmap != null) {
                     showBigNotification(bitmap, mBuilder, icon, title, message, timeStamp, resultPendingIntent, alarmSound);
                 } else {
-                    showBigNotification(test, mBuilder, icon, title, message, timeStamp, resultPendingIntent, alarmSound);
+                    showBigNotification(bitmap, mBuilder, icon, title, message, timeStamp, resultPendingIntent, alarmSound);
                 }
             }
         } else {

@@ -24,6 +24,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
+                                                <entry key="paddingPercent" value="-10" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -34,7 +35,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/navigation/ic_arrow_back_black_24dp.xml" />
+                                                <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/content/ic_add_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -56,8 +57,8 @@
                                   <option name="values">
                                     <map>
                                       <entry key="imageAsset" value="C:\Users\Claudiu\Desktop\AFC\app\src\main\res\drawable\afc_border_logo.png" />
-                                      <entry key="outputName" value="ic_search_dialog_back" />
-                                      <entry key="theme" value="CUSTOM" />
+                                      <entry key="outputName" value="nav_course_add" />
+                                      <entry key="theme" value="HOLO_DARK" />
                                       <entry key="themeColor" value="5f6267" />
                                     </map>
                                   </option>

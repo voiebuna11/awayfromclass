@@ -67,7 +67,7 @@ public class ChatLobbyActivity extends BaseActivity {
         };
     }
     private void setChatLobbyDetails(){
-        setTitle("Mesaje");
+        setTitle(getString(R.string.sidemenu_messages));
 
         mLobbyLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         mLobbyRecyclerView.setLayoutManager(mLobbyLayoutManager);
@@ -146,6 +146,11 @@ public class ChatLobbyActivity extends BaseActivity {
     @Override
     public int getLayoutResource() {
         return R.layout.activity_chat_lobby;
+    }
+
+    @Override
+    public int getToolbarResource() {
+        return R.id.top_menu_layout;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.example.afc.activities;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -30,7 +31,9 @@ import com.example.afc.app.Config;
 import com.example.afc.app.DBManagement;
 import com.example.afc.app.SessionManagement;
 import com.example.afc.chat.ChatLobbyActivity;
+import com.example.afc.course.CourseListActivity;
 import com.example.afc.main.MainActivity;
+import com.example.afc.user.FilesActivity;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.HashMap;
@@ -54,6 +57,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Activity activity = (Activity) this;
 
         //check session(if user is logged in)
         session = new SessionManagement(getApplicationContext());
@@ -63,7 +67,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         //setup activity layout elements
         setContentView(getLayoutResource());
         configureToolbar();
-        configureSideMenu();
+        configureSideMenu(activity);
         configureSideMenuHeader();
 
         startLoadingBar();
@@ -73,17 +77,21 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
     protected abstract int getLayoutResource();
 
+    protected abstract int getToolbarResource();
+
     //Top menu intialization
     protected void configureToolbar() {
-        toolbar = (Toolbar) findViewById(R.id.top_menu_layout);
+        toolbar = (Toolbar) findViewById(getToolbarResource());
         if (toolbar != null) {
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+        toolbar.setPadding(0,0,0,0);
+        toolbar.setContentInsetsAbsolute(0,0);
     }
 
     //Side menu initialization
-    private void configureSideMenu(){
+    private void configureSideMenu(final Activity activity){
         nv = (NavigationView) findViewById(R.id.side_menu);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
 
@@ -95,22 +103,27 @@ public abstract class BaseActivity extends AppCompatActivity {
         nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
-                Intent intent;
+                Intent intent = null;
+
+                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                 switch (menuItem.getItemId()) {
-                    case(R.id.nav_home):
-                        intent = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(intent);
-                        return true;
-                    case(R.id.nav_settings):
-                        return true;
-                    case(R.id.nav_messages):
-                        intent = new Intent(getApplicationContext(), ChatLobbyActivity.class);
-                        startActivity(intent);
-                        return true;
-                    case(R.id.nav_logout):
-                        session.logoutUser();
-                        return true;
+                    case(R.id.nav_home): intent = new Intent(getApplicationContext(), MainActivity.class);
+                        if(activity instanceof MainActivity) return true; break;
+                    case(R.id.nav_messages): intent = new Intent(getApplicationContext(), ChatLobbyActivity.class);
+                        if(activity instanceof ChatLobbyActivity) return true; break;
+                    case(R.id.nav_courses): intent = new Intent(getApplicationContext(), CourseListActivity.class);
+                        if(activity instanceof CourseListActivity) return true; break;
+                    case(R.id.nav_my_files): intent = new Intent(getApplicationContext(), FilesActivity.class);
+                        if(activity instanceof FilesActivity) return true; break;
+                    case(R.id.nav_notifications): intent = new Intent(getApplicationContext(), EmptyActivity.class);
+                        if(activity instanceof EmptyActivity) return true; break;
+                    case(R.id.nav_settings): intent = new Intent(getApplicationContext(), EmptyActivity.class);
+                        if(activity instanceof EmptyActivity) return true; break;
+                    case(R.id.nav_logout): session.logoutUser(); break;
+                    default:
+                        break;
                 }
+                startActivity(intent);
                 return true;
             }
         });

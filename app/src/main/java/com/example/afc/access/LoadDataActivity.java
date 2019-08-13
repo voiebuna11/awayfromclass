@@ -9,8 +9,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.animation.Animation;
-import android.view.animation.LinearInterpolator;
-import android.view.animation.RotateAnimation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -21,9 +20,9 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.example.afc.R;
-import com.example.afc.main.MainActivity;
 import com.example.afc.app.Config;
 import com.example.afc.app.SessionManagement;
+import com.example.afc.main.MainActivity;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
@@ -38,18 +37,17 @@ public class LoadDataActivity extends AppCompatActivity {
     private SessionManagement session;
     HashMap<String, String> sessionData;
     private RequestQueue mQueue;
+    Animation mRotateAnimation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_load_data);
 
-        RotateAnimation anim = new RotateAnimation(0f, 350f, 25f, 25f);
-        anim.setInterpolator(new LinearInterpolator());
-        anim.setRepeatCount(Animation.INFINITE);
-        anim.setDuration(700);
+        mRotateAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotation);
+        mRotateAnimation.setRepeatCount(Animation.INFINITE);
         // Start animating the image
         final ImageView splash = (ImageView) findViewById(R.id.loading_pen);
-        splash.startAnimation(anim);
+        splash.startAnimation(mRotateAnimation);
         //getAFCConnectionLink();
 
         mQueue =  Volley.newRequestQueue(getApplicationContext());

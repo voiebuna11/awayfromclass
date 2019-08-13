@@ -22,7 +22,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -72,6 +71,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         mLastUsersView = (RecyclerView) findViewById(R.id.last_users_list);
 
@@ -85,7 +85,6 @@ public class MainActivity extends BaseActivity {
         searchSuggestions = db.getSearchHistory("");
         jsonParseLastUsers();
         configureSideMenu();
-        configureToolbar();
         configureSearch();
     }
 
@@ -240,13 +239,6 @@ public class MainActivity extends BaseActivity {
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
     }
 
-    protected void configureToolbar() {
-        toolbar = (Toolbar) findViewById(R.id.top_menu_main_layout);
-        if (toolbar != null) {
-            setSupportActionBar(toolbar);
-        }
-    }
-
     protected void configureSideMenu() {
         customToggleBtn = (CustomDrawerButton) findViewById(R.id.main_toggle_btn);
 
@@ -286,5 +278,10 @@ public class MainActivity extends BaseActivity {
     @Override
     public int getLayoutResource() {
         return R.layout.activity_main;
+    }
+
+    @Override
+    public int getToolbarResource() {
+        return R.id.top_menu_main_layout;
     }
 }

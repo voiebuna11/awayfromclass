@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.afc.R;
 import com.example.afc.activities.ProfileActivity;
@@ -61,7 +60,7 @@ class RecyclerLastUserListAdapter extends RecyclerView.Adapter<RecyclerLastUserL
         Glide.with(ctx)
                 .load(url)
                 .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
-                .apply(RequestOptions.bitmapTransform(new RoundedCorners(14)))
+                .apply(RequestOptions.circleCropTransform())
                 .into(holder.mProfilePic);
 
         holder.mBody.setOnClickListener(new View.OnClickListener() {

@@ -13,7 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".chat.ChatLobbyActivity"/>
+        <activity android:name=".course.AddCourseActivity"></activity>
+        <activity
+            android:name=".user.FilesActivity"
+            android:label="@string/title_activity_files"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".course.CourseListActivity" />
+        <activity android:name=".chat.ChatLobbyActivity" />
         <activity
             android:name=".activities.ProfileActivity"
             android:label="" />
@@ -29,11 +35,12 @@
             android:name=".access.RegisterActivity"
             android:label="@string/title_activity_register"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".access.LoginActivity" />
-        <!--suppress AndroidDomInspection -->
+        <activity android:name=".access.LoginActivity" /> <!-- suppress AndroidDomInspection -->
         <activity android:name=".activities.BaseActivity" />
         <activity android:name=".activities.EmptyActivity" />
-        <activity android:name=".main.MainActivity" android:label=""/> <!-- Firebase Notifications -->
+        <activity
+            android:name=".main.MainActivity"
+            android:label="" /> <!-- Firebase Notifications -->
         <service android:name=".services.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

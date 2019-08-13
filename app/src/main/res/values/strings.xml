@@ -74,5 +74,9 @@
     <string name="main_last_title">Utilizatori noi</string>
     <string name="main_last_subtitle">Cele mai recente &#238;nregistr&#259;ri</string>
 
+    <string name="course_list_empty">Nu s-a g&#259;sit nici un curs.</string>
+    <string name="course_list_add">Curs nou</string>
+
     <string name="inter_dot">&#183;</string>
+    <string name="title_activity_files">ActivityFiles</string>
 </resources>

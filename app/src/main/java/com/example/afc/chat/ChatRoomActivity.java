@@ -16,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import androidx.appcompat.widget.Toolbar;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -72,7 +71,7 @@ public class ChatRoomActivity extends BaseTransparentActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setToolbar();
+        toolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.colorBackground), PorterDuff.Mode.SRC_ATOP);
 
         mChatPartnerName = (TextView) findViewById(R.id.top_menu_chat_room_name);
         mChatPartnerPic = (ImageView) findViewById(R.id.top_menu_chat_room_pic);
@@ -353,16 +352,6 @@ public class ChatRoomActivity extends BaseTransparentActionBarActivity {
         scrollToBottom();
     }
 
-    private void setToolbar(){
-        toolbar = (Toolbar) findViewById(R.id.top_menu_chat_room_layout);
-        if (toolbar != null) {
-            setSupportActionBar(toolbar);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            //change color of home button
-            toolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.colorBackground), PorterDuff.Mode.SRC_ATOP);
-        }
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -395,6 +384,11 @@ public class ChatRoomActivity extends BaseTransparentActionBarActivity {
     @Override
     public int getLayoutResource() {
         return R.layout.activity_chat_room;
+    }
+
+    @Override
+    public int getToolbarResource() {
+        return R.id.top_menu_chat_room_layout;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.example.afc.activities;
 
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.Menu;
@@ -16,22 +17,27 @@ public abstract class BaseTransparentActionBarActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         //setup activity layout elements
         setContentView(getLayoutResource());
         configureToolbar();
-        configureSideMenuHeader();
     }
     protected abstract int getLayoutResource();
 
     //Top menu intialization
     protected void configureToolbar() {
-        toolbar = (Toolbar) findViewById(R.id.top_menu_layout_transparent);
+        toolbar = (Toolbar) findViewById(getToolbarResource());
         if (toolbar != null) {
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            toolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.colorBackground), PorterDuff.Mode.SRC_ATOP);
+            toolbar.getNavigationIcon().setColorFilter(Color.parseColor("#ffffff"), PorterDuff.Mode.SRC_ATOP);
+            toolbar.setPadding(0,0,0,0);
+            toolbar.setContentInsetsAbsolute(0,0);
         }
+    }
+
+    @Override
+    public int getToolbarResource() {
+        return R.id.top_menu_layout_transparent;
     }
 
     @Override
