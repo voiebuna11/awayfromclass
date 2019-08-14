@@ -1,9 +1,11 @@
 package com.example.afc.main;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatTextView;
@@ -47,12 +49,18 @@ class RecyclerSuggestionListAdapter extends RecyclerView.Adapter<RecyclerSuggest
             super(itemView);
             itemView.setOnClickListener(this);
             mText = (AppCompatTextView) itemView.findViewById(R.id.suggestion_text);
+            mText.setTextAppearance(ctx, R.style.Widget_AppTheme_BorderlessButton);
         }
 
         @Override
         public void onClick(View view) {
             int i = getLayoutPosition();
-            alert(mList.get(i));
+            InputMethodManager imm = (InputMethodManager) ctx.getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+
+            Intent intent = new Intent(ctx, SearchListActivity.class);
+            intent.putExtra("EXTRA_SEARCH", mList.get(i));
+            ctx.startActivity(intent);
         }
     }
     public void alert(String text) {

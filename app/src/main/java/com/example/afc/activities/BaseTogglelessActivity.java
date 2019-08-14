@@ -12,7 +12,7 @@ import com.example.afc.R;
 
 /* This is a Base Activity. Includes features used by multiple activies across the APP */
 
-public abstract class BaseTransparentActionBarActivity extends BaseActivity {
+public abstract class BaseTogglelessActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

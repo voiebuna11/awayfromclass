@@ -19,7 +19,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.afc.R;
-import com.example.afc.activities.ProfileActivity;
+import com.example.afc.user.ProfileActivity;
 import com.example.afc.app.SessionManagement;
 import com.example.afc.app.User;
 
@@ -74,8 +74,6 @@ class RecyclerLastUserListAdapter extends RecyclerView.Adapter<RecyclerLastUserL
                     ActivityOptionsCompat options = ActivityOptionsCompat.
                             makeSceneTransitionAnimation(activity, (View) holder.mProfilePic, "profile_pic");
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-
 
                     activity.startActivity(intent, options.toBundle());
                     //activity.finish();

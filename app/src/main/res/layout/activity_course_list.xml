@@ -22,7 +22,15 @@
                 android:layout_height="match_parent"
                 android:text="@string/course_list_empty"
                 android:gravity="center"
-                android:visibility="visible"/>
+                android:visibility="gone"/>
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/course_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </ScrollView>
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/add_new_course"
                 android:layout_width="wrap_content"

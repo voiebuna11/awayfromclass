@@ -105,7 +105,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 Intent intent = null;
 
-                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+                drawerLayout.closeDrawers();
                 switch (menuItem.getItemId()) {
                     case(R.id.nav_home): intent = new Intent(getApplicationContext(), MainActivity.class);
                         if(activity instanceof MainActivity) return true; break;
@@ -119,7 +119,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                         if(activity instanceof EmptyActivity) return true; break;
                     case(R.id.nav_settings): intent = new Intent(getApplicationContext(), EmptyActivity.class);
                         if(activity instanceof EmptyActivity) return true; break;
-                    case(R.id.nav_logout): session.logoutUser(); break;
+                    case(R.id.nav_logout): session.logoutUser(); return true;
                     default:
                         break;
                 }

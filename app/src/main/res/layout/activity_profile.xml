@@ -60,31 +60,31 @@
                     android:orientation="vertical">
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/profile_user"
-                        style="@style/ImageButtonBottomBordered"
+                        style="@style/Widget.AppTheme.BorderlessButton"
                         android:drawableLeft="@drawable/ic_btn_user"
                         android:text="username" />
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/profile_phone"
-                        style="@style/ImageButtonBottomBordered"
+                        style="@style/Widget.AppTheme.BorderlessButton"
                         android:drawableLeft="@drawable/ic_btn_phone"
                         android:text="(+40) 0762190393"
                         android:onClick="callUser"
                         tools:ignore="OnClick" />
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/profile_email"
-                        style="@style/ImageButtonBottomBordered"
+                        style="@style/Widget.AppTheme.BorderlessButton"
                         android:drawableLeft="@drawable/ic_btn_mail_contact"
                         android:text="aabbbcccc@example.dom"
                         android:onClick="sendMailUser"
                         tools:ignore="OnClick" />
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/profile_city"
-                        style="@style/ImageButtonBottomBordered"
+                        style="@style/Widget.AppTheme.BorderlessButton"
                         android:drawableLeft="@drawable/ic_btn_city"
                         android:text="City / Locality" />
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/profile_group"
-                        style="@style/ImageButtonBottomBordered"
+                        style="@style/Widget.AppTheme.BorderlessButton"
                         android:drawableLeft="@drawable/ic_btn_year"
                         android:text="SPEC X" />
                 </LinearLayout>

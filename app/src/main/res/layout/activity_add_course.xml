@@ -13,11 +13,43 @@
         android:orientation="vertical">
         <include layout="@layout/top_menu_layout" android:layout_width="match_parent" android:layout_height="wrap_content"/>
         <include layout="@layout/loading_bar_layout" android:layout_width="match_parent" android:layout_height="match_parent"/>
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:text="This is add course activity"/>
+            android:orientation="vertical"
+            android:padding="15dp">
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
+            <EditText
+                android:id="@+id/course_add_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:hint="@string/course_add_name"
+                android:inputType="text"/>
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="8dp">
+                <EditText
+                    android:id="@+id/course_add_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/course_add_description"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Signup Button -->
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_marginTop="30dp"
+                style="@style/FilledButtonPrimary"
+                android:text="@string/course_add_btn"/>
+        </LinearLayout>
     </LinearLayout>
     <include layout="@layout/side_menu_layout"/>
 </androidx.drawerlayout.widget.DrawerLayout>

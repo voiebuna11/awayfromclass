@@ -29,8 +29,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.afc.R;
-import com.example.afc.activities.BaseTransparentActionBarActivity;
-import com.example.afc.activities.ProfileActivity;
+import com.example.afc.activities.BaseTogglelessActivity;
+import com.example.afc.user.ProfileActivity;
 import com.example.afc.app.Config;
 import com.example.afc.app.User;
 import com.example.afc.classes.NotificationUtils;
@@ -50,7 +50,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ChatRoomActivity extends BaseTransparentActionBarActivity {
+public class ChatRoomActivity extends BaseTogglelessActivity {
     private ArrayList<Message> mMessageList;
 
     private User mChatPartner;

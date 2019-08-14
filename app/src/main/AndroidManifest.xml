@@ -13,7 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".course.AddCourseActivity"></activity>
+        <activity android:name=".main.SearchListActivity"></activity>
+        <activity android:name=".course.CourseProfViewActivity" />
+        <activity android:name=".course.AddCourseActivity" />
         <activity
             android:name=".user.FilesActivity"
             android:label="@string/title_activity_files"
@@ -21,7 +23,7 @@
         <activity android:name=".course.CourseListActivity" />
         <activity android:name=".chat.ChatLobbyActivity" />
         <activity
-            android:name=".activities.ProfileActivity"
+            android:name=".user.ProfileActivity"
             android:label="" />
         <activity android:name=".chat.ChatRoomActivity" />
         <activity android:name=".access.LoadDataActivity">

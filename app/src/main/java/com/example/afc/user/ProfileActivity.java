@@ -1,4 +1,4 @@
-package com.example.afc.activities;
+package com.example.afc.user;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -15,12 +15,13 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.afc.R;
+import com.example.afc.activities.BaseTogglelessActivity;
 import com.example.afc.app.User;
 import com.example.afc.chat.ChatRoomActivity;
 
 import java.io.Serializable;
 
-public class ProfileActivity extends BaseTransparentActionBarActivity {
+public class ProfileActivity extends BaseTogglelessActivity {
     private AppCompatButton userAccPrf, userEmailPrf, userPhonePrf, userCityPrf, userGroupPrf;
     private TextView userNamePrf;
     private User mUser;

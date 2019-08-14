@@ -6,11 +6,6 @@
     <string name="user_prof">Profesor</string>
 
     <string name="app_intent_mail">Trimite mail</string>
-    <string-array name="query_suggestions">
-        <item>Android</item>
-        <item>iOS</item>
-        <item>SCALA</item>
-    </string-array>
 
     <string name="sidemenu_open">Open</string>
     <string name="sidemenu_close">Close</string>
@@ -21,8 +16,6 @@
     <string name="sidemenu_myfiles">Fi&#537;ierele mele</string>
     <string name="sidemenu_settings">Set&#259;ri</string>
     <string name="sidemenu_logout">Deconectare</string>
-
-    <string name="topmenu_search_hint">C&#259;uta&#539;i &#238;n Away From Class</string>
 
     <string name="progress_loading">Se &#238;ncarc&#259;..</string>
     <string name="progress_login">Autentificare..</string>
@@ -42,6 +35,7 @@
     <string name="alert_regex_phone_message">Num&#259;rul de telefon poate con&#539;ine doar cifre.</string>
     <string name="alert_regex_year_message">Anul de studiu poate con&#539;ine doar o cifr&#259;.</string>
     <string name="alert_regex_spec_message">Specializarea poate con&#539;ine doar minim 3 litere.</string>
+    <string name="alert_regex_course_name_message">Numele de cursului poate con&#539;ine doar litere &#537;i spa&#539;ii. Minim 5 caractere.</string>
     <string name="alert_button_tryagain">&#206;ncearc&#259; din nou</string>
     <string name="alert_button_ok">Ok</string>
 
@@ -75,7 +69,22 @@
     <string name="main_last_subtitle">Cele mai recente &#238;nregistr&#259;ri</string>
 
     <string name="course_list_empty">Nu s-a g&#259;sit nici un curs.</string>
-    <string name="course_list_add">Curs nou</string>
+
+    <string name="course_add_title">Curs nou</string>
+    <string name="course_add_name">Nume</string>
+    <string name="course_add_description">Descriere</string>
+    <string name="course_add_btn">Creeaz&#259; cursul</string>
+    <string name="course_add_already">Numele cursului este folosit deja!</string>
+    <string name="course_add_success">Cursul a fost creat cu succes!</string>
+
+    <string name="course_view_content_title">Con&#539;inut</string>
+    <string name="course_view_news_title">&#350;tiri</string>
+    <string name="course_view_participants_title">Participan&#539;i</string>
+    <string name="course_view_enroll_requests_title">Cereri de &#238;nscriere</string>
+
+    <string name="search_user_title">Utilizatori</string>
+    <string name="search_courses_title">Cursuri</string>
+    <string name="topmenu_search_hint">C&#259;uta&#539;i &#238;n Away From Class</string>
 
     <string name="inter_dot">&#183;</string>
     <string name="title_activity_files">ActivityFiles</string>

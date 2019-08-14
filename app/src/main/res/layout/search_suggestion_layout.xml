@@ -2,6 +2,7 @@
 <androidx.appcompat.widget.AppCompatTextView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/suggestion_text"
-    style="@style/SuggestionSearchBordered"
-    android:drawableLeft="@drawable/ic_btn_complete"
-    android:text="sugestie" />
+    style="@style/Widget.AppTheme.BorderlessButton"
+    android:padding="15dp"
+    android:drawablePadding="25dp"
+    android:drawableLeft="@drawable/ic_btn_complete" />

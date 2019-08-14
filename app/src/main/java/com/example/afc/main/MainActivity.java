@@ -5,6 +5,7 @@ import android.animation.ValueAnimator;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.InsetDrawable;
@@ -150,6 +151,7 @@ public class MainActivity extends BaseActivity {
         searchDialog = new Dialog(this);
         searchDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         searchDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        searchDialog.setCancelable(true);
 
         View view;
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -171,6 +173,12 @@ public class MainActivity extends BaseActivity {
         });
         mBackSearchBtn.setAnimation(mRotateAnimation);
 
+        mBackSearchBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                hideSearchDialog();
+            }
+        });
+
         searchDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(final DialogInterface arg0) {
@@ -189,7 +197,9 @@ public class MainActivity extends BaseActivity {
                     hideSearchDialog();
                     v.setText("");
 
-                    //Log.e("SAVED INTO history: ", search);
+                    Intent intent = new Intent(getApplicationContext(), SearchListActivity.class);
+                    intent.putExtra("EXTRA_SEARCH", search);
+                    startActivity(intent);
                     return true;
                 }
                 return false;

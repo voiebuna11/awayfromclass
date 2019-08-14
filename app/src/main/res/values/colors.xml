@@ -11,4 +11,5 @@
     <color name="chat_typebox_gray">#f2f3f5</color>
     <color name="colorGray">#eeeeee</color>
     <color name="chat_message_from_gray">#f0f0f0</color>
+    <color name="colorTintGray">#f0f0f0</color>
 </resources>
