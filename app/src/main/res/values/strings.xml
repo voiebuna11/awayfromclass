@@ -86,6 +86,16 @@
     <string name="search_courses_title">Cursuri</string>
     <string name="topmenu_search_hint">C&#259;uta&#539;i &#238;n Away From Class</string>
 
+    <string name="file_list_title">Fi&#537;ierele mele</string>
+    <string name="file_list_empty">Nu s-a g&#259;sit nici un fi&#537;ier &#238;nc&#259;rcat</string>
+    <string name="file_list_uploading">Se salveaz&#259;...</string>
+    <string name="file_list_uploading_success">Fi&#537;ierul a fost salvat cu succes</string>
+    <string name="file_list_not_found">Fi&#537;ierul nu a fost g&#259;sit</string>
+    <string name="file_list_source_not_found">Fi&#537;ierul surs&#259; nu exist&#259;</string>
+    <string name="file_list_not_sent">Fi&#537;ierul nu s-a trimis la server</string>
+    <string name="file_list_wrong_url">Serverul nu exist&#259; sau este indisponibil</string>
+    <string name="file_list_wrong_format">Fi&#537;ierul este inaccesibil</string>
+
     <string name="inter_dot">&#183;</string>
     <string name="title_activity_files">ActivityFiles</string>
 </resources>

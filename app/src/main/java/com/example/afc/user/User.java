@@ -1,4 +1,4 @@
-package com.example.afc.app;
+package com.example.afc.user;
 
 import java.io.Serializable;
 

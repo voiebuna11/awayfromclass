@@ -1,4 +1,4 @@
-package com.example.afc.classes;
+package com.example.afc.app;
 
 import android.app.ActivityManager;
 import android.app.Notification;
@@ -21,7 +21,6 @@ import android.util.Patterns;
 import androidx.core.app.NotificationCompat;
 
 import com.example.afc.R;
-import com.example.afc.app.Config;
 import com.example.afc.chat.ChatLobbyActivity;
 
 import java.io.IOException;
@@ -34,13 +33,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class NotificationUtils {
+public class NotificationManagement {
 
-    private static String TAG = NotificationUtils.class.getSimpleName();
+    private static String TAG = NotificationManagement.class.getSimpleName();
 
     private Context mContext;
 
-    public NotificationUtils(Context mContext) {
+    public NotificationManagement(Context mContext) {
         this.mContext = mContext;
     }
 

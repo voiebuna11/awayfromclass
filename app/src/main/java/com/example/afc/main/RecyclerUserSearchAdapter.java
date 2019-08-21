@@ -1,20 +1,16 @@
 package com.example.afc.main;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.afc.R;
-import com.example.afc.app.User;
-import com.example.afc.course.Course;
-import com.example.afc.course.CourseProfViewActivity;
+import com.example.afc.user.User;
 
 import java.util.ArrayList;
 

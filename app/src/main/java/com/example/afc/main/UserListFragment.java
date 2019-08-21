@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.afc.R;
 import com.example.afc.activities.BaseFragment;
 import com.example.afc.app.Config;
-import com.example.afc.app.User;
+import com.example.afc.user.User;
 
 import java.util.ArrayList;
 

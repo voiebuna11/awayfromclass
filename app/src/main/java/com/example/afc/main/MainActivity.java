@@ -36,7 +36,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.afc.R;
 import com.example.afc.activities.BaseActivity;
 import com.example.afc.app.Config;
-import com.example.afc.app.User;
+import com.example.afc.user.User;
 import com.example.afc.classes.CustomDrawerButton;
 import com.example.afc.classes.CustomEditText;
 
@@ -91,7 +91,7 @@ public class MainActivity extends BaseActivity {
 
     private void jsonParseLastUsers() {
         startLoadingBar();
-        String url = session.getAFCLink() + "/afc/user/get_last_registered_users.php";
+        String url = session.getAFCLink() + "/afc/users/get_last_registered_users.php";
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

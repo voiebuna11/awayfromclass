@@ -30,10 +30,10 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.afc.R;
 import com.example.afc.activities.BaseTogglelessActivity;
+import com.example.afc.app.NotificationManagement;
 import com.example.afc.user.ProfileActivity;
 import com.example.afc.app.Config;
-import com.example.afc.app.User;
-import com.example.afc.classes.NotificationUtils;
+import com.example.afc.user.User;
 
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
@@ -66,7 +66,7 @@ public class ChatRoomActivity extends BaseTogglelessActivity {
     private TextView mChatPartnerName;
 
     public BroadcastReceiver mRegistrationBroadcastReceiver;
-    public NotificationUtils notificationUtils;
+    public NotificationManagement notificationManagement;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +82,7 @@ public class ChatRoomActivity extends BaseTogglelessActivity {
         mChatRecyclerView.setHasFixedSize(true);
 
         mMessageList = new ArrayList<Message>();
-        notificationUtils = new NotificationUtils(getApplicationContext());
+        notificationManagement = new NotificationManagement(getApplicationContext());
 
         //Passed info from last activity
         mChatPartner = (User) getIntent().getSerializableExtra("EXTRA_USER");
@@ -252,7 +252,7 @@ public class ChatRoomActivity extends BaseTogglelessActivity {
         sendMessageToServer(mChatPartner.getId(), sessionData.get(Config.KEY_ID), message, timestamp);
 
         //clear message box
-        notificationUtils.playMessageSound();
+        notificationManagement.playMessageSound();
         mMessageBox.setText("");
     }
 
@@ -405,7 +405,7 @@ public class ChatRoomActivity extends BaseTogglelessActivity {
                 new IntentFilter(Config.CHAT_MESSAGE));
 
         // clear the notification area when the app is opened
-        NotificationUtils.clearNotifications(getApplicationContext());
+        NotificationManagement.clearNotifications(getApplicationContext());
     }
 
     @Override

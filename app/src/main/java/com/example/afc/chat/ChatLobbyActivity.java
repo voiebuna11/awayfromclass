@@ -20,8 +20,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.example.afc.R;
 import com.example.afc.activities.BaseActivity;
 import com.example.afc.app.Config;
-import com.example.afc.app.User;
-import com.example.afc.classes.NotificationUtils;
+import com.example.afc.app.NotificationManagement;
+import com.example.afc.user.User;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,14 +40,14 @@ public class ChatLobbyActivity extends BaseActivity {
     RecyclerView.Adapter mAdapter;
 
     public BroadcastReceiver mRegistrationBroadcastReceiver;
-    public NotificationUtils notificationUtils;
+    public NotificationManagement notificationManagement;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         mUserList = new ArrayList<LobbyUser>();
-        notificationUtils = new NotificationUtils(getApplicationContext());
+        notificationManagement = new NotificationManagement(getApplicationContext());
 
         mChatLobbyEmpty = (TextView) findViewById(R.id.chat_lobby_empty);
         mLobbyRecyclerView = (RecyclerView) findViewById(R.id.chat_lobby_list);
@@ -166,7 +166,7 @@ public class ChatLobbyActivity extends BaseActivity {
                 new IntentFilter(Config.CHAT_MESSAGE));
 
         // clear the notification area when the app is opened
-        NotificationUtils.clearNotifications(getApplicationContext());
+        NotificationManagement.clearNotifications(getApplicationContext());
 
         jsonParseLobbyList();
     }

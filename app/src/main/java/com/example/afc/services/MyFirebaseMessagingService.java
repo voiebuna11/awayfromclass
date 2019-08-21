@@ -8,21 +8,21 @@ import android.util.Log;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.afc.app.Config;
+import com.example.afc.app.NotificationManagement;
 import com.example.afc.chat.ChatRoomActivity;
-import com.example.afc.classes.NotificationUtils;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import static com.example.afc.classes.NotificationUtils.getTimeSec;
+import static com.example.afc.app.NotificationManagement.getTimeSec;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private static final String TAG = MyFirebaseMessagingService.class.getSimpleName();
 
-    private NotificationUtils notificationUtils;
+    private NotificationManagement notificationManagement;
 
     @Override
     public void onNewToken(String mToken) {
@@ -59,15 +59,15 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
 
     private void handleNotification(String message) {
-        if (!NotificationUtils.isAppIsInBackground(getApplicationContext())) {
+        if (!NotificationManagement.isAppIsInBackground(getApplicationContext())) {
             // app is in foreground, broadcast the push message
             //Intent chatMessage = new Intent(Config.CHAT_MESSAGE);
             //chatMessage.putExtra("message", message);
             //LocalBroadcastManager.getInstance(this).sendBroadcast(chatMessage);
 
             // play notification sound
-            //NotificationUtils notificationUtils = new NotificationUtils(getApplicationContext());
-            //notificationUtils.playNotificationSound();
+            //NotificationManagement notificationManagement = new NotificationManagement(getApplicationContext());
+            //notificationManagement.playNotificationSound();
         }else{
             // If the app is in background, firebase itself handles the notification
         }
@@ -95,7 +95,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             //Log.e(TAG, "imageUrl: " + imageUrl);
             //Log.e(TAG, "timestamp: " + timestamp);
 
-            if (!NotificationUtils.isAppIsInBackground(getApplicationContext())) {
+            if (!NotificationManagement.isAppIsInBackground(getApplicationContext())) {
                 // app is in foreground, broadcast the push message
                 Intent chatMessage = new Intent(Config.CHAT_MESSAGE);
                 chatMessage.putExtra("message", message);
@@ -105,8 +105,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 LocalBroadcastManager.getInstance(this).sendBroadcast(chatMessage);
 
                 // play notification sound
-                NotificationUtils notificationUtils = new NotificationUtils(getApplicationContext());
-                notificationUtils.playMessageSound();
+                NotificationManagement notificationManagement = new NotificationManagement(getApplicationContext());
+                notificationManagement.playMessageSound();
             } else {
                 // app is in background, show the notification in notification tray
                 Intent resultIntent = new Intent(getApplicationContext(), ChatRoomActivity.class);
@@ -131,17 +131,17 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
      * Showing notification with text only
      */
     private void showNotificationMessage(Context context, String title, String message, String timeStamp, Intent intent) {
-        notificationUtils = new NotificationUtils(context);
+        notificationManagement = new NotificationManagement(context);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        notificationUtils.showNotificationMessage(title, message, timeStamp, intent);
+        notificationManagement.showNotificationMessage(title, message, timeStamp, intent);
     }
 
     /**
      * Showing notification with text and image
      */
     private void showNotificationMessageWithBigImage(Context context, String title, String message, String timeStamp, Intent intent, String imageUrl) {
-        notificationUtils = new NotificationUtils(context);
+        notificationManagement = new NotificationManagement(context);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        notificationUtils.showNotificationMessage(title, message, timeStamp, intent, imageUrl);
+        notificationManagement.showNotificationMessage(title, message, timeStamp, intent, imageUrl);
     }
 }

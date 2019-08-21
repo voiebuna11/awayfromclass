@@ -21,7 +21,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.afc.R;
 import com.example.afc.user.ProfileActivity;
 import com.example.afc.app.SessionManagement;
-import com.example.afc.app.User;
+import com.example.afc.user.User;
 
 import java.io.Serializable;
 import java.util.ArrayList;
