@@ -43,10 +43,10 @@ class RecyclerUserSearchAdapter extends RecyclerView.Adapter<RecyclerUserSearchA
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        public TextView mName;
-        public TextView mEmail;
+        private TextView mName;
+        private TextView mEmail;
 
-        public ViewHolder(View itemView) {
+        private ViewHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
             mName = (TextView) itemView.findViewById(R.id.search_user_name);

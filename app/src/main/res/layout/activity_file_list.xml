@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawerLayout"
-    tools:context=".activities.EmptyActivity">
+    tools:context=".user.FilesActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,23 +22,78 @@
                 android:layout_height="match_parent"
                 android:text="@string/file_list_empty"
                 android:gravity="center"
+                android:background="#ffffff"
                 android:visibility="gone"/>
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/file_list"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="20dp"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:layout_marginBottom="10dp"
+                        >
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:onClick="showSorting">
+                            <TextView
+                                android:id="@+id/file_list_sort_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="15sp"
+                                android:text="Sorting"
+                                android:textStyle="bold"
+                                android:layout_marginLeft="3dp"
+                                android:textColor="@color/colorDefaultMenuGray"
+                                android:layout_centerVertical="true"/>
+                            <ImageView
+                                android:id="@+id/file_list_sort_icon"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="5dp"
+                                android:background="@drawable/file_list_sort_arrow_down"
+                                android:layout_centerVertical="true"
+                                android:layout_toRightOf="@+id/file_list_sort_title"
+                                />
+                        </RelativeLayout>
+
+                        <com.example.afc.classes.PolymorphButton
+                            android:id="@+id/file_list_adapter"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:padding="5dp"
+                            android:background="@drawable/ic_arrow_up"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentRight="true"
+                            />
+                    </RelativeLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/file_list"
+                        android:layout_width="match_parent"
+                        android:nestedScrollingEnabled="false"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
             </ScrollView>
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/add_new_file"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|end"
-                android:layout_margin="@dimen/fab_margin"
-                app:srcCompat="@drawable/nav_course_add"
+                android:layout_marginTop="@dimen/fab_margin"
+                android:layout_marginLeft="@dimen/fab_margin"
+                android:layout_marginRight="@dimen/fab_margin"
+                android:layout_marginBottom="32dp"
+                app:srcCompat="@drawable/file_list_upload"
                 android:backgroundTint="@color/colorPrimary"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"

@@ -5,10 +5,10 @@ public class MyFile {
     private String name;
     private String author;
     private String type;
-
     private String date;
 
     public MyFile(String id, String author, String name, String type, String date) {
+        this.id = id;
         this.name = name;
         this.author = author;
         this.type = type;

@@ -24,7 +24,6 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="paddingPercent" value="-10" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -35,7 +34,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/navigation/ic_more_vert_black_24dp.xml" />
+                                                <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_list_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -56,8 +55,8 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="imageAsset" value="C:\Users\Claudiu\Desktop\AFC\app\src\main\res\drawable\afc_border_logo.png" />
-                                      <entry key="outputName" value="ic_menu_dots" />
+                                      <entry key="imageAsset" value="C:\Users\Claudiu\Downloads\google-drive-file.svg" />
+                                      <entry key="outputName" value="file_list_adapter" />
                                       <entry key="theme" value="CUSTOM" />
                                       <entry key="themeColor" value="5f6267" />
                                     </map>
@@ -183,6 +182,11 @@
                 </map>
               </option>
             </PersistentState>
+          </value>
+        </entry>
+        <entry key="vectorWizard">
+          <value>
+            <PersistentState />
           </value>
         </entry>
       </map>

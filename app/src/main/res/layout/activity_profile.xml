@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawerLayout"
-    tools:context=".activities.EmptyActivity">
+    tools:context=".user.ProfileActivity">
     <include layout="@layout/loading_bar_layout" android:layout_width="match_parent" android:layout_height="match_parent"/>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -68,15 +68,13 @@
                         style="@style/Widget.AppTheme.BorderlessButton"
                         android:drawableLeft="@drawable/ic_btn_phone"
                         android:text="(+40) 0762190393"
-                        android:onClick="callUser"
-                        tools:ignore="OnClick" />
+                        android:onClick="callUser" />
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/profile_email"
                         style="@style/Widget.AppTheme.BorderlessButton"
                         android:drawableLeft="@drawable/ic_btn_mail_contact"
                         android:text="aabbbcccc@example.dom"
-                        android:onClick="sendMailUser"
-                        tools:ignore="OnClick" />
+                        android:onClick="sendMailUser"/>
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/profile_city"
                         style="@style/Widget.AppTheme.BorderlessButton"

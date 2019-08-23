@@ -1,6 +1,8 @@
 package com.example.afc.activities;
 
 import android.app.Activity;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -20,8 +22,14 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -37,6 +45,7 @@ import com.example.afc.user.FilesActivity;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 /* This is a Base Activity. Includes features used by multiple activies across the APP */
@@ -190,6 +199,45 @@ public abstract class BaseActivity extends AppCompatActivity {
     public int getRandom(int from, int to){
         Random r = new Random();
         return r.nextInt(to-from) + from;
+    }
+
+    public void copyToClipboard(String text, String label){
+        ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText(label, text);
+        clipboard.setPrimaryClip(clip);
+        alert(getString(R.string.file_list_copy_to_clipboard));
+    }
+
+    //get user files from server
+    public void deleteFileFromServer(final String fileName,final RecyclerView.Adapter adapter) {
+        String url = session.getAFCLink() + "/afc/users/remove_user_file.php";
+        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if(response.equals("success: file_removed")){
+                    alert(getString(R.string.file_list_removed));
+                } else {
+                    alert(response);
+                }
+                adapter.notifyDataSetChanged();
+                stopLoadingBar();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String, String> params = new HashMap<>();
+                params.put("user_id", sessionData.get(Config.KEY_ID)); //parametrii POST
+                params.put("file_name", fileName);
+                return params;
+            }
+        };
+        mQueue.add(request);
     }
 
     @Override

@@ -17,6 +17,12 @@
     <string name="sidemenu_settings">Set&#259;ri</string>
     <string name="sidemenu_logout">Deconectare</string>
 
+    <string name="options_menu_fl_preview">Previzualiza&#539;i</string>
+    <string name="options_menu_fl_download">Desc&#259;rca&#539;i</string>
+    <string name="options_menu_fl_rename">Redenumiti&#539;i</string>
+    <string name="options_menu_fl_remove">Elimina&#539;i</string>
+    <string name="options_menu_fl_copy_link">Copia&#539;i linkul</string>
+
     <string name="progress_loading">Se &#238;ncarc&#259;..</string>
     <string name="progress_login">Autentificare..</string>
     <string name="progress_register">Se &#238;nregistreaz&#259; datele..</string>
@@ -95,7 +101,16 @@
     <string name="file_list_not_sent">Fi&#537;ierul nu s-a trimis la server</string>
     <string name="file_list_wrong_url">Serverul nu exist&#259; sau este indisponibil</string>
     <string name="file_list_wrong_format">Fi&#537;ierul este inaccesibil</string>
+    <string name="file_list_last_modified">Ultima modificare</string>
+    <string name="file_list_download_success">Fi&#537;ierul s-a desc&#259;rcat cu succes</string>
+    <string name="file_list_download_fail">Eroare la desc&#259;rcare</string>
+    <string name="file_list_directory_fail">Eroare la crearea directorului AFC</string>
+    <string name="file_list_copy_to_clipboard">Linkul a fost copiat &#238;n clipboard</string>
+    <string name="file_list_removed">Fi&#537;ier &#537;ters</string>
 
     <string name="inter_dot">&#183;</string>
     <string name="title_activity_files">ActivityFiles</string>
+
+    <string name="general_term_today">Ast&#259;zi</string>
+    <string name="general_term_yesterday">Ieri</string>
 </resources>

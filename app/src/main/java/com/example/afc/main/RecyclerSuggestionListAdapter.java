@@ -15,7 +15,7 @@ import com.example.afc.R;
 
 import java.util.ArrayList;
 
-class RecyclerSuggestionListAdapter extends RecyclerView.Adapter<RecyclerSuggestionListAdapter.ViewHolder> {
+public class RecyclerSuggestionListAdapter extends RecyclerView.Adapter<RecyclerSuggestionListAdapter.ViewHolder> {
     private Context ctx;
     private ArrayList<String> mList;
 

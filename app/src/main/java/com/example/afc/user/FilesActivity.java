@@ -1,19 +1,14 @@
 package com.example.afc.user;
 
-import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,7 +20,9 @@ import com.android.volley.toolbox.StringRequest;
 import com.example.afc.R;
 import com.example.afc.activities.BaseActivity;
 import com.example.afc.app.Config;
+import com.example.afc.classes.DateUtil;
 import com.example.afc.classes.FilePath;
+import com.example.afc.classes.PolymorphButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
@@ -44,62 +41,78 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 public class FilesActivity extends BaseActivity {
     private int REQUEST_PERMISSION;
     private static final int PICK_FILE_REQUEST = 1;
+    public static final int progress_bar_type = 0;
     private static final String TAG = FilesActivity.class.getSimpleName();
-    private String selectedFilePath, SERVER_URL;
+
+    private String selectedFilePath, mFilesLocation;
+    private DateUtil mCurrentDate;
 
     ProgressDialog dialog;
     FloatingActionButton addFileBtn;
+    // Progress Dialog
+    ProgressDialog mDownloadProgress;
     
     RecyclerView mFilesRecyclerView;
     RecyclerView.LayoutManager mFilesLayoutManager;
     RecyclerView.Adapter mAdapter;
-    
-    ArrayList<MyFile> mFileList;
 
+    TextView mFileListEmpty;
+    ArrayList<MyFile> mFileList;
+    PolymorphButton mAdapterDisplayBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setTitle(getString(R.string.file_list_title));
-        SERVER_URL  = session.getAFCLink() + "/afc/users/add_new_file.php?user_name=" + sessionData.get(Config.KEY_USER);
         mFileList = new ArrayList<MyFile>();
+        mCurrentDate = new DateUtil(new Date());
+        mFilesLocation = session.getAFCLink() + "/afc/users/" + sessionData.get(Config.KEY_USER) + "/";
 
-        addFileBtn = findViewById(R.id.add_new_file);
+        addFileBtn = (FloatingActionButton) findViewById(R.id.add_new_file);
+        mFilesRecyclerView = (RecyclerView) findViewById(R.id.file_list);
+        mFileListEmpty = (TextView) findViewById(R.id.file_list_empty);
+
+
+        mAdapterDisplayBtn = (PolymorphButton) findViewById(R.id.file_list_adapter);
+        mAdapterDisplayBtn.setBackgrounds(R.drawable.file_list_adapter, R.drawable.file_list_adapter);
+
+        mDownloadProgress = new ProgressDialog(this);
+        mDownloadProgress.setMessage("Downloading file. Please wait...");
+        mDownloadProgress.setIndeterminate(false);
+        mDownloadProgress.setMax(100);
+        mDownloadProgress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        mDownloadProgress.setCancelable(true);
 
         addFileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    if (ContextCompat.checkSelfPermission(FilesActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                        ActivityCompat.requestPermissions(FilesActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                                REQUEST_PERMISSION);
-                    } else {
-                        showFileChooser();
-                    }
-                }
+                showFileChooser();
             }
         });
 
-        mFilesRecyclerView = (RecyclerView) findViewById(R.id.course_list);
+        //set recyler list and manager layout
         mFilesRecyclerView.setHasFixedSize(true);
-
         mFilesLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         mFilesRecyclerView.setLayoutManager(mFilesLayoutManager);
 
-        mAdapter = new RecyclerFileListAdapter(getApplicationContext(), mFileList);
+        mAdapter = new RecyclerFileListAdapter(this, mFileList);
         mFilesRecyclerView.setAdapter(mAdapter);
 
-        stopLoadingBar();
+        jsonParseMyFiles();
     }
 
+    //get user files from server
     private void jsonParseMyFiles() {
         startLoadingBar();
+        mFileList.clear();
+
         String url = session.getAFCLink() + "/afc/users/get_user_files.php";
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -121,6 +134,7 @@ public class FilesActivity extends BaseActivity {
                         ));
                     }
                     mAdapter.notifyDataSetChanged();
+                    if(mFileList.size() == 0) mFileListEmpty.setVisibility(View.VISIBLE);
                     stopLoadingBar();
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -204,7 +218,7 @@ public class FilesActivity extends BaseActivity {
         }else{
             try{
                 FileInputStream fileInputStream = new FileInputStream(selectedFile);
-                URL url = new URL(SERVER_URL);
+                URL url = new URL(session.getAFCLink() + "/afc/users/add_new_file.php?user_name=" + sessionData.get(Config.KEY_USER));
                 connection = (HttpURLConnection) url.openConnection();
                 connection.setDoInput(true);//Allow Inputs
                 connection.setDoOutput(true);//Allow Outputs
@@ -270,9 +284,14 @@ public class FilesActivity extends BaseActivity {
                         @Override
                         public void run() {
                             switch (data){
-                                case "success: file_uploaded": alert(getString(R.string.file_list_uploading_success)); break;
-                                case "error: file_not_sent": alert(getString(R.string.file_list_not_sent));
-                                default: alert(data);
+                                case "success: file_uploaded":
+                                    alert(getString(R.string.file_list_uploading_success));
+                                    jsonParseMyFiles();
+                                    break;
+                                case "error: file_not_sent":
+                                    alert(getString(R.string.file_list_not_sent));
+                                default:
+                                    alert(data);
                             }
                         }
                     });
@@ -303,6 +322,10 @@ public class FilesActivity extends BaseActivity {
         }
     }
 
+    public void showSorting(View view){
+
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -323,20 +346,6 @@ public class FilesActivity extends BaseActivity {
                 }else{
                     alert(getString(R.string.file_list_wrong_format));
                 }
-            }
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(final int requestCode, @NonNull final String[] permissions, @NonNull final int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUEST_PERMISSION) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission granted.
-                showFileChooser();
-            } else {
-                // User refused to grant permission.
-                finish();
             }
         }
     }
