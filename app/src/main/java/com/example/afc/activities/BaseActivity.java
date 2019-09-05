@@ -124,8 +124,6 @@ public abstract class BaseActivity extends AppCompatActivity {
                         if(activity instanceof CourseListActivity) return true; break;
                     case(R.id.nav_my_files): intent = new Intent(getApplicationContext(), FilesActivity.class);
                         if(activity instanceof FilesActivity) return true; break;
-                    case(R.id.nav_notifications): intent = new Intent(getApplicationContext(), EmptyActivity.class);
-                        if(activity instanceof EmptyActivity) return true; break;
                     case(R.id.nav_settings): intent = new Intent(getApplicationContext(), EmptyActivity.class);
                         if(activity instanceof EmptyActivity) return true; break;
                     case(R.id.nav_logout): session.logoutUser(); return true;

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawerLayout"
-    tools:context=".activities.EmptyActivity">
+    tools:context=".course.AddCourseActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,11 +44,12 @@
                     android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Signup Button -->
+            <!-- Create course Button -->
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_marginTop="30dp"
                 style="@style/FilledButtonPrimary"
-                android:text="@string/course_add_btn"/>
+                android:text="@string/course_add_btn"
+                android:onClick="createCourse"/>
         </LinearLayout>
     </LinearLayout>
     <include layout="@layout/side_menu_layout"/>

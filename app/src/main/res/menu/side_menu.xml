@@ -5,16 +5,12 @@
             android:id="@+id/nav_home"
             android:icon="@drawable/side_menu_home"
             android:title="@string/sidemenu_main" />
+    </group>
+    <group android:id="@+id/grp2" android:checkableBehavior="none">
         <item
             android:id="@+id/nav_courses"
             android:icon="@drawable/side_menu_student"
             android:title="@string/sidemenu_courses" />
-    </group>
-    <group android:id="@+id/grp2" android:checkableBehavior="none" >
-        <item
-            android:id="@+id/nav_notifications"
-            android:icon="@drawable/side_menu_bell"
-            android:title="@string/sidemenu_notifications" />
         <item
             android:id="@+id/nav_my_files"
             android:icon="@drawable/side_menu_file"

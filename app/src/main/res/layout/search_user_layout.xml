@@ -11,9 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="20dp"
-        android:paddingRight="20dp"
         android:paddingTop="10dp"
-        android:paddingBottom="10dp">
+        android:paddingBottom="10dp"
+        android:background="?attr/selectableItemBackground">
         <ImageView
             android:id="@+id/search_user_avatar"
             android:layout_width="55dp"
@@ -36,8 +36,7 @@
                 android:layout_height="wrap_content"
                 android:text="Lastname Firstname"
                 android:textSize="17sp"
-                android:textColor="@color/colorBlack"
-                android:layout_centerVertical="true"/>
+                android:textColor="@color/colorBlack"/>
             <TextView
                 android:id="@+id/search_user_email"
                 android:layout_width="wrap_content"
@@ -49,12 +48,14 @@
                 android:layout_weight="1"
                 android:maxLines="1"/>
         </LinearLayout>
-        <androidx.appcompat.widget.AppCompatButton
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/search_user_message"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:background="@drawable/ic_send_message"/>
+            android:src="@drawable/ic_send_message"
+            android:background="?attr/selectableItemBackgroundBorderless"/>
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

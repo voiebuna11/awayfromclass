@@ -8,17 +8,18 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.afc.R;
 import com.example.afc.activities.BaseActivity;
+import com.example.afc.app.Config;
 import com.example.afc.classes.SectionsPageAdapter;
+import com.example.afc.content.ContentsFragment;
 import com.google.android.material.tabs.TabLayout;
 
-public class CourseProfViewActivity extends BaseActivity {
+public class CourseViewActivity extends BaseActivity {
     private static final String TAB = "Course View";
     private ViewPager mViewPager;
     private SectionsPageAdapter mSectionsPagerAdapter;
     private TabLayout mTabLayout;
 
-    String mCourseId;
-    String mCourseName;
+    private String mCourseId, mCourseName, mCourseAuthor, mCourseFolder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,8 @@ public class CourseProfViewActivity extends BaseActivity {
 
         mCourseId = getIntent().getStringExtra("EXTRA_COURSE_ID");
         mCourseName = getIntent().getStringExtra("EXTRA_COURSE_NAME");
+        mCourseAuthor = getIntent().getStringExtra("EXTRA_COURSE_AUTHOR");
+        mCourseFolder = getIntent().getStringExtra("EXTRA_COURSE_FOLDER");
 
         setTitle(mCourseName);
         mSectionsPagerAdapter = new SectionsPageAdapter(getSupportFragmentManager());
@@ -59,17 +62,22 @@ public class CourseProfViewActivity extends BaseActivity {
     private void setupViewPager(ViewPager viewPager){
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
 
-        adapter.addFragment(new ContentsFragment(mCourseId), getString(R.string.course_view_content_title));
         adapter.addFragment(new NewsFragment(mCourseId), getString(R.string.course_view_news_title));
+        adapter.addFragment(new ContentsFragment(mCourseId, mCourseFolder), getString(R.string.course_view_content_title));
         adapter.addFragment(new MembersFragment(mCourseId), getString(R.string.course_view_participants_title));
-        adapter.addFragment(new EnrollmentRequestsFragment(mCourseId), getString(R.string.course_view_enroll_requests_title));
 
+        if(sessionData.get(Config.KEY_ID).equals(mCourseAuthor)) {
+            viewPager.setOffscreenPageLimit(4);
+            adapter.addFragment(new EnrollmentRequestsFragment(mCourseId), getString(R.string.course_view_enroll_requests_title));
+        }
         viewPager.setAdapter(adapter);
+        viewPager.setOffscreenPageLimit(3);
+
     }
 
     @Override
     public int getLayoutResource() {
-        return R.layout.activity_course_prof_view;
+        return R.layout.activity_course_view;
     }
 
     @Override

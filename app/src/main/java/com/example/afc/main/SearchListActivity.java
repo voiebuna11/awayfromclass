@@ -10,18 +10,13 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.afc.R;
 import com.example.afc.activities.BaseTogglelessActivity;
 import com.example.afc.classes.SectionsPageAdapter;
-import com.example.afc.course.Course;
 import com.google.android.material.tabs.TabLayout;
 
-import java.util.ArrayList;
-
 public class SearchListActivity extends BaseTogglelessActivity {
-    ArrayList<Course> mCourseList;
     AppCompatTextView mSearchBox;
 
     String mSearchTerm;
 
-    private static final String TAB = "Course View";
     private ViewPager mViewPager;
     private SectionsPageAdapter mSectionsPagerAdapter;
     private TabLayout mTabLayout;
@@ -48,7 +43,7 @@ public class SearchListActivity extends BaseTogglelessActivity {
             public void onTabSelected(TabLayout.Tab tab) {
                 //do stuff here
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    tab.getIcon().setTint(getResources().getColor(R.color.colorPrimary));
+                    tab.getIcon().setTint(getResources().getColor(R.color.colorPrimaryDark));
                 }
             }
 
@@ -62,7 +57,7 @@ public class SearchListActivity extends BaseTogglelessActivity {
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    tab.getIcon().setTint(getResources().getColor(R.color.colorPrimary));
+                    tab.getIcon().setTint(getResources().getColor(R.color.colorPrimaryDark));
                 }
             }
         });
@@ -71,24 +66,14 @@ public class SearchListActivity extends BaseTogglelessActivity {
         mTabLayout.getTabAt(1).setIcon(R.drawable.tab_ic_courses);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) mTabLayout.getTabAt(1).getIcon().setTint(getResources().getColor(R.color.colorDefaultMenuGray));
 
-        //mCoursesRecyclerView = (RecyclerView) findViewById(R.id.course_list);
-
         mSearchBox.setText(mSearchTerm);
-        //mCoursesRecyclerView.setHasFixedSize(true);
-
-        //mCoursesLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
-        //mCoursesRecyclerView.setLayoutManager(mCoursesLayoutManager);
-        //mAdapter = new RecyclerUserSearchAdapter(getApplicationContext(), mCourseList);
-        //mCoursesRecyclerView.setAdapter(mAdapter);
-
-        //jsonParseCourseList();
     }
 
     private void setupViewPager(ViewPager viewPager){
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
 
-        adapter.addFragment(new UserListFragment(mSearchTerm), getString(R.string.search_courses_title));
-        adapter.addFragment(new CourseListFragment(mSearchTerm), getString(R.string.search_user_title));
+        adapter.addFragment(new UserListFragment(mSearchTerm), getString(R.string.search_user_title));
+        adapter.addFragment(new CourseListFragment(mSearchTerm), getString(R.string.search_courses_title));
 
         viewPager.setAdapter(adapter);
     }

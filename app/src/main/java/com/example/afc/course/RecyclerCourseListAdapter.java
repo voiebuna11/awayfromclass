@@ -54,9 +54,11 @@ class RecyclerCourseListAdapter extends RecyclerView.Adapter<RecyclerCourseListA
         public void onClick(View view) {
             int i = getLayoutPosition();
 
-            Intent intent = new Intent(ctx, CourseProfViewActivity.class);
+            Intent intent = new Intent(ctx, CourseViewActivity.class);
             intent.putExtra("EXTRA_COURSE_ID", mList.get(i).getId() + "");
             intent.putExtra("EXTRA_COURSE_NAME", mList.get(i).getName());
+            intent.putExtra("EXTRA_COURSE_AUTHOR", mList.get(i).getAuthor());
+            intent.putExtra("EXTRA_COURSE_FOLDER", mList.get(i).getFolder());
             ctx.startActivity(intent);
         }
     }

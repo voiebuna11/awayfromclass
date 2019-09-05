@@ -74,7 +74,12 @@
     <string name="main_last_title">Utilizatori noi</string>
     <string name="main_last_subtitle">Cele mai recente &#238;nregistr&#259;ri</string>
 
+    <string name="course_enrollment_request">Cererea de &#238;nscriere a fost &#238;nregistrat&#259;</string>
+    <string name="course_enrollment_accepted_req">Cererea de &#238;nscriere a fost acceptat&#259;</string>
+    <string name="course_enrollment_denied_req">Cererea de &#238;nscriere a fost refuzat&#259;</string>
     <string name="course_list_empty">Nu s-a g&#259;sit nici un curs.</string>
+
+    <string name="course_content_list_empty">Nu s-a g&#259;sit nici un con&#539;inut ad&#259;ugat.</string>
 
     <string name="course_add_title">Curs nou</string>
     <string name="course_add_name">Nume</string>
@@ -83,13 +88,22 @@
     <string name="course_add_already">Numele cursului este folosit deja!</string>
     <string name="course_add_success">Cursul a fost creat cu succes!</string>
 
+    <string name="content_add_title">Con&#539;inut nou</string>
+    <string name="content_add_name">Nume</string>
+    <string name="content_add_description">Descriere</string>
+    <string name="content_add_btn">Adaug&#259; con&#539;inutul</string>
+    <string name="content_add_already">Numele con&#539;inutului este folosit deja!</string>
+    <string name="content_add_success">Con&#539;inutul a fost ad&#259;ugat cu succes!</string>
+
     <string name="course_view_content_title">Con&#539;inut</string>
-    <string name="course_view_news_title">&#350;tiri</string>
+    <string name="course_view_news_title">Nout&#259;&#539;i</string>
     <string name="course_view_participants_title">Participan&#539;i</string>
     <string name="course_view_enroll_requests_title">Cereri de &#238;nscriere</string>
 
     <string name="search_user_title">Utilizatori</string>
     <string name="search_courses_title">Cursuri</string>
+    <string name="search_list_user_empty">Nu s-a g&#259;sit nici un utilizator</string>
+    <string name="search_list_course_empty">Nu s-a g&#259;sit nici un curs</string>
     <string name="topmenu_search_hint">C&#259;uta&#539;i &#238;n Away From Class</string>
 
     <string name="file_list_title">Fi&#537;ierele mele</string>
@@ -113,4 +127,6 @@
 
     <string name="general_term_today">Ast&#259;zi</string>
     <string name="general_term_yesterday">Ieri</string>
+    <string name="general_term_accept">Accept&#259;</string>
+    <string name="general_term_deny">Refuz&#259;</string>
 </resources>

@@ -36,6 +36,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.afc.R;
 import com.example.afc.activities.BaseActivity;
 import com.example.afc.app.Config;
+import com.example.afc.course.Course;
 import com.example.afc.user.User;
 import com.example.afc.classes.CustomDrawerButton;
 import com.example.afc.classes.CustomEditText;
@@ -54,6 +55,7 @@ public class MainActivity extends BaseActivity {
 
     ArrayList<String> searchSuggestions;
     ArrayList<User> mLastUsersList;
+    ArrayList<Object> mFeedList;
 
     RecyclerView.LayoutManager mSearchLayoutManager;
     RecyclerView.Adapter mSearchAdapter;
@@ -82,11 +84,55 @@ public class MainActivity extends BaseActivity {
 
         searchSuggestions = new ArrayList<String>();
         mLastUsersList = new ArrayList<User>();
+        mFeedList = new ArrayList<Object>();
 
         searchSuggestions = db.getSearchHistory("");
+        getFeedList();
         jsonParseLastUsers();
         configureSideMenu();
         configureSearch();
+    }
+
+    private void getFeedList(){
+        for(int i = 0; i < 35; i++){
+            if(i%2==0){
+                mFeedList.add(
+                    "Numarul cu caracter " + i
+                );
+            } else if(i%3==0){
+                mFeedList.add(
+                        i
+                );
+            } else {
+                new Course(
+                        i,
+                        "Nume "+ i,
+                        "",
+                        "asddsa",
+                        "folder"
+                );
+            }
+
+        }
+        RecyclerMoreTypesAdapter mAdapter;
+        RecyclerView mRecyclerView;
+        LinearLayoutManager mLayoutManager;
+
+        //find recyclerview layout
+        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_test);
+        mRecyclerView.setHasFixedSize(true);
+
+        // recyclerview set layoutmanager
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        //recyclerview adapter
+        mAdapter = new RecyclerMoreTypesAdapter(MainActivity.this, mFeedList);
+
+        //set adpater for recyclerview
+        mRecyclerView.setAdapter(mAdapter);
+
+
     }
 
     private void jsonParseLastUsers() {

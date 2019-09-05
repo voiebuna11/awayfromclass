@@ -2,7 +2,6 @@ package com.example.afc.course;
 
 import android.os.Bundle;
 import android.text.InputType;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
@@ -87,17 +86,6 @@ public class AddCourseActivity extends BaseTogglelessActivity {
         };
         mQueue.add(request);
 
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 
     @Override

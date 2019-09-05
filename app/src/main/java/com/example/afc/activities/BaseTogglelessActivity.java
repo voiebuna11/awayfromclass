@@ -46,14 +46,13 @@ public abstract class BaseTogglelessActivity extends BaseActivity {
         getMenuInflater().inflate(R.menu.top_menu, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(toggleBtn.onOptionsItemSelected(item)){
-            return true;
-        }
-
         switch (item.getItemId()) {
-            //case R.id.nav_mail: stopLoadingBar(); return true;
+            case android.R.id.home:
+                finish();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

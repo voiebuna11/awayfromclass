@@ -46,14 +46,13 @@ public class RecyclerFileListAdapter extends RecyclerView.Adapter<RecyclerFileLi
     private String mFilesLocation;
     private RequestQueue mQueue;
 
-    public RecyclerFileListAdapter(Context ctx, ArrayList<MyFile> mList){
+    public RecyclerFileListAdapter(Context ctx, ArrayList<MyFile> mList, String mFilesLocation){
         this.ctx = ctx;
         this.mList = mList;
         this.mCurrentDate = new DateUtil(new Date());
-
         this.session = new SessionManagement(ctx);
         this.sessionData = session.getUserDetails();
-        this.mFilesLocation = session.getAFCLink() + "/afc/users/" + sessionData.get(Config.KEY_USER) + "/";
+        this.mFilesLocation = mFilesLocation;
         this.mQueue = Volley.newRequestQueue(ctx);
     }
 
@@ -147,6 +146,15 @@ public class RecyclerFileListAdapter extends RecyclerView.Adapter<RecyclerFileLi
                 popup = new PopupMenu(ctx, holder.mOptions, Gravity.LEFT);
                 //inflating menu from xml resource
                 popup.getMenuInflater().inflate(R.menu.options_menu_file_list, popup.getMenu());
+
+                //visibility of options
+                if(mFilesLocation.contains("course") && !sessionData.get(Config.KEY_ID).equals(mList.get(i).getAuthor())) {
+                    MenuItem renameBtn = popup.getMenu().findItem(R.id.fl_rename);
+                    MenuItem removeBtn= popup.getMenu().findItem(R.id.fl_remove);
+                    renameBtn.setVisible(false);
+                    removeBtn.setVisible(false);
+                }
+
                 //adding click listener
                 //displaying the popup
                 popup.show();
@@ -166,7 +174,10 @@ public class RecyclerFileListAdapter extends RecyclerView.Adapter<RecyclerFileLi
                                 //handle menu3 click
                                 break;
                             case R.id.fl_remove:
-                                deleteFileFromServer(fileName, i);
+                                if(mList.get(i).getContent_id()==null)
+                                    deleteFileFromServer(fileName, i, "");
+                                else
+                                    deleteFileFromServer(fileName, i, mList.get(i).getContent_id());
                                 break;
                             case R.id.fl_copy_link:
                                 copyToClipboard(fileName, "afc_file");
@@ -207,6 +218,7 @@ public class RecyclerFileListAdapter extends RecyclerView.Adapter<RecyclerFileLi
         @Override
         public void onClick(View view) {
             int i = getLayoutPosition();
+            alert(mFilesLocation);
         }
     }
 
@@ -222,8 +234,13 @@ public class RecyclerFileListAdapter extends RecyclerView.Adapter<RecyclerFileLi
     }
 
     //get user files from server
-    private void deleteFileFromServer(final String fileName, final int position) {
-        String url = session.getAFCLink() + "/afc/users/remove_user_file.php";
+    private void deleteFileFromServer(final String fileName, final int position, final String contentId) {
+        String url = "";
+        if(mFilesLocation.contains("users")){
+            url = session.getAFCLink() + "/afc/users/remove_user_file.php";
+        } else {
+            url = session.getAFCLink() + "/afc/courses/remove_course_file.php";
+        }
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -246,8 +263,9 @@ public class RecyclerFileListAdapter extends RecyclerView.Adapter<RecyclerFileLi
             protected Map<String, String> getParams() throws AuthFailureError {
 
                 Map<String, String> params = new HashMap<>();
-                params.put("user_id", sessionData.get(Config.KEY_ID)); //parametrii POST
+                params.put("user_id", mList.get(position).getAuthor()); //parametrii POST
                 params.put("file_name", fileName);
+                params.put("content_id", contentId);
                 return params;
             }
         };

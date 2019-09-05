@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,7 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.afc.R;
-import com.example.afc.activities.BaseActivity;
+import com.example.afc.activities.BaseTogglelessActivity;
 import com.example.afc.app.Config;
 import com.example.afc.classes.DateUtil;
 import com.example.afc.classes.FilePath;
@@ -45,7 +46,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FilesActivity extends BaseActivity {
+public class FilesActivity extends BaseTogglelessActivity {
     private int REQUEST_PERMISSION;
     private static final int PICK_FILE_REQUEST = 1;
     public static final int progress_bar_type = 0;
@@ -56,13 +57,12 @@ public class FilesActivity extends BaseActivity {
 
     ProgressDialog dialog;
     FloatingActionButton addFileBtn;
-    // Progress Dialog
-    ProgressDialog mDownloadProgress;
     
     RecyclerView mFilesRecyclerView;
     RecyclerView.LayoutManager mFilesLayoutManager;
     RecyclerView.Adapter mAdapter;
 
+    RelativeLayout mFileListMenu;
     TextView mFileListEmpty;
     ArrayList<MyFile> mFileList;
     PolymorphButton mAdapterDisplayBtn;
@@ -78,17 +78,10 @@ public class FilesActivity extends BaseActivity {
         addFileBtn = (FloatingActionButton) findViewById(R.id.add_new_file);
         mFilesRecyclerView = (RecyclerView) findViewById(R.id.file_list);
         mFileListEmpty = (TextView) findViewById(R.id.file_list_empty);
-
+        mFileListMenu = (RelativeLayout) findViewById(R.id.file_list_menu);
 
         mAdapterDisplayBtn = (PolymorphButton) findViewById(R.id.file_list_adapter);
         mAdapterDisplayBtn.setBackgrounds(R.drawable.file_list_adapter, R.drawable.file_list_adapter);
-
-        mDownloadProgress = new ProgressDialog(this);
-        mDownloadProgress.setMessage("Downloading file. Please wait...");
-        mDownloadProgress.setIndeterminate(false);
-        mDownloadProgress.setMax(100);
-        mDownloadProgress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        mDownloadProgress.setCancelable(true);
 
         addFileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,7 +95,7 @@ public class FilesActivity extends BaseActivity {
         mFilesLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         mFilesRecyclerView.setLayoutManager(mFilesLayoutManager);
 
-        mAdapter = new RecyclerFileListAdapter(this, mFileList);
+        mAdapter = new RecyclerFileListAdapter(this, mFileList, mFilesLocation);
         mFilesRecyclerView.setAdapter(mAdapter);
 
         jsonParseMyFiles();
@@ -134,7 +127,15 @@ public class FilesActivity extends BaseActivity {
                         ));
                     }
                     mAdapter.notifyDataSetChanged();
-                    if(mFileList.size() == 0) mFileListEmpty.setVisibility(View.VISIBLE);
+                    if(mFileList.size() == 0){
+                        mFileListEmpty.setVisibility(View.VISIBLE);
+                        mFileListMenu.setVisibility(View.GONE);
+                    }
+                    else{
+                        mFileListEmpty.setVisibility(View.GONE);
+                        mFileListMenu.setVisibility(View.VISIBLE);
+                    }
+
                     stopLoadingBar();
                 } catch (JSONException e) {
                     e.printStackTrace();
