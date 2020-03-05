@@ -16,6 +16,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.afc.R;
 import com.example.afc.activities.BaseFragment;
+import com.example.afc.content.Content;
 import com.example.afc.user.News;
 import com.example.afc.user.User;
 
@@ -24,12 +25,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
 public class NewsFragment extends BaseFragment {
     private static final String TAG = "Continut";
-    private String mCourseId;
+    private String mCourseId, mCourseFolder;
     ArrayList<News> mNewsList = new ArrayList<News>();;
 
     RecyclerView mRecyclerView;
@@ -37,8 +40,9 @@ public class NewsFragment extends BaseFragment {
     RecyclerView.Adapter mAdapter;
     TextView mNewsListEmpty;
 
-    public NewsFragment(String course_id){
+    public NewsFragment(String course_id, String course_folder){
         this.mCourseId = course_id;
+        this.mCourseFolder = course_folder;
     }
 
     @Override
@@ -51,9 +55,9 @@ public class NewsFragment extends BaseFragment {
 
         mLayoutManager = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new RecyclerCourseNewsAdapter(getActivity(), mNewsList);
+        mAdapter = new RecyclerCourseNewsAdapter(getActivity(), mNewsList, mCourseFolder);
         mRecyclerView.setAdapter(mAdapter);
-        jsonParseNewsList();
+
         return view;
     }
 
@@ -71,15 +75,18 @@ public class NewsFragment extends BaseFragment {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject intermediar = jsonArray.getJSONObject(i);
 
-                        String jsonString = intermediar.getString("author");
-                        JSONObject author = new JSONObject(jsonString);
+                        String jsonAuthorString = intermediar.getString("author");
+                        String jsonItemString = intermediar.getString("item");
+                        JSONObject author = new JSONObject(jsonAuthorString);
+                        JSONObject item = new JSONObject(jsonItemString);
 
                         mNewsList.add(new News(
                                 intermediar.getInt("event_id"),
                                 intermediar.getInt("event_author_id"),
-                                intermediar.getInt("event_target_id"),
+                                intermediar.getString("event_target_id"),
+                                intermediar.getInt("event_context_id"),
                                 intermediar.getString("event_target_type"),
-                                intermediar.getString("event_type"),
+                                intermediar.getString("event_context"),
                                 intermediar.getString("event_action"),
                                 intermediar.getString("event_date"),
                                 new User(
@@ -94,11 +101,50 @@ public class NewsFragment extends BaseFragment {
                                         author.getString("user_year"),
                                         author.getString("user_spec"),
                                         author.getString("user_pic"),
-                                        author.getString("user_chat_id")
-                                )
+                                        author.getString("user_chat_id"))
                         ));
+
+                        switch (intermediar.getString("event_target_type")){
+                            case "content":
+                            case "file":
+                                mNewsList.get(i).setContent(new Content(
+                                        item.getInt("content_id"),
+                                        Integer.parseInt(mCourseId),
+                                        item.getString("content_name"),
+                                        item.getString("content_description")
+                                        ));
+                                break;
+                            case "user":
+                                mNewsList.get(i).setTargetUser(new User(
+                                        item.getString("target_user_id"),
+                                        item.getString("target_user_type"),
+                                        item.getString("target_user_user"),
+                                        item.getString("target_user_email"),
+                                        item.getString("target_user_fname"),
+                                        item.getString("target_user_lname"),
+                                        item.getString("target_user_city"),
+                                        item.getString("target_user_phone"),
+                                        item.getString("target_user_year"),
+                                        item.getString("target_user_spec"),
+                                        item.getString("target_user_pic"),
+                                        item.getString("target_user_chat_id")
+                                ));
+                            default: break;
+
+                        }
                     }
-                    if(mNewsList.size() == 0) mNewsListEmpty.setVisibility(View.VISIBLE);
+                    if(mNewsList.size() == 0)
+                        mNewsListEmpty.setVisibility(View.VISIBLE);
+                    else
+                        mNewsListEmpty.setVisibility(View.GONE);
+
+                    //SORT DESCENDING
+                    Collections.sort(mNewsList, new Comparator<News>() {
+                        @Override
+                        public int compare(News n1, News n2) {
+                            return n2.getId() - n1.getId(); // Descending
+                        }
+                    });
 
                     mAdapter.notifyDataSetChanged();
                     stopLoadingBar();
@@ -127,4 +173,9 @@ public class NewsFragment extends BaseFragment {
     @Override
     protected int getLayoutResource() { return R.layout.course_news_fragment; }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        jsonParseNewsList();
+    }
 }

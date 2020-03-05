@@ -83,7 +83,7 @@ public class RecyclerFileListAdapter extends RecyclerView.Adapter<RecyclerFileLi
         } else if(fileDate.getYear() < mCurrentDate.getYear()){
             holder.mDate.setText(fileDate.getDate("dd MMM yyyy"));
         }else {
-            holder.mDate.setText(fileDate.getDate("dd MMM"));
+            holder.mDate.setText(fileDate.getDate("dd MMM la HH:mm"));
         }
 
         //set icon

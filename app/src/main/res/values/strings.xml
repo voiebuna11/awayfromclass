@@ -80,6 +80,7 @@
     <string name="course_list_empty">Nu s-a g&#259;sit nici un curs.</string>
 
     <string name="course_content_list_empty">Nu s-a g&#259;sit nici un con&#539;inut ad&#259;ugat.</string>
+    <string name="course_news_list_empty">Nu s-a g&#259;sit nici o noutate despre curs.</string>
 
     <string name="course_add_title">Curs nou</string>
     <string name="course_add_name">Nume</string>
@@ -99,6 +100,18 @@
     <string name="course_view_news_title">Nout&#259;&#539;i</string>
     <string name="course_view_participants_title">Participan&#539;i</string>
     <string name="course_view_enroll_requests_title">Cereri de &#238;nscriere</string>
+
+    <string name="course_event_course_creation">a creat cursul.</string>
+    <string name="course_event_course_edit">a schimbat datele din descrierea cursului.</string>
+    <string name="course_event_course_removed">a &#537;ters cursul.</string>
+    <string name="course_event_enroll_pending"> a trimis o cerere de &#238;nscriere la curs.</string>
+    <string name="course_event_enroll_accepted">a acceptat cererea de &#238;nscriere a lui</string>
+    <string name="course_event_enroll_rejected">a refuzat cererea de &#238;nscriere a lui</string>
+    <string name="course_event_file_added"> a ad&#259;ugat un fi&#537;ier nou &#238;n</string>
+    <string name="course_event_file_removed">a &#537;ters fi&#537;ierul</string>
+    <string name="course_event_content_creation">a ad&#259;ugat un con&#539;inut nou la curs sub denumirea de</string>
+    <string name="course_event_content_edit">a schimbat datele din descrierea con&#539;inutului </string>
+    <string name="course_event_content_removed">a &#537;ters un con&#539;inut legat de acest curs.</string>
 
     <string name="search_user_title">Utilizatori</string>
     <string name="search_courses_title">Cursuri</string>
@@ -129,4 +142,6 @@
     <string name="general_term_yesterday">Ieri</string>
     <string name="general_term_accept">Accept&#259;</string>
     <string name="general_term_deny">Refuz&#259;</string>
+    <string name="general_term_from">din</string>
+    <string name="general_term_pressing_on_here">apas&#226;nd aici</string>
 </resources>

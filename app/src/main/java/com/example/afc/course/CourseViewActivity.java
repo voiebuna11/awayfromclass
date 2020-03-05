@@ -62,16 +62,17 @@ public class CourseViewActivity extends BaseActivity {
     private void setupViewPager(ViewPager viewPager){
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
 
-        adapter.addFragment(new NewsFragment(mCourseId), getString(R.string.course_view_news_title));
+        adapter.addFragment(new NewsFragment(mCourseId, mCourseFolder), getString(R.string.course_view_news_title));
         adapter.addFragment(new ContentsFragment(mCourseId, mCourseFolder), getString(R.string.course_view_content_title));
         adapter.addFragment(new MembersFragment(mCourseId), getString(R.string.course_view_participants_title));
 
         if(sessionData.get(Config.KEY_ID).equals(mCourseAuthor)) {
             viewPager.setOffscreenPageLimit(4);
             adapter.addFragment(new EnrollmentRequestsFragment(mCourseId), getString(R.string.course_view_enroll_requests_title));
+        } else {
+            viewPager.setOffscreenPageLimit(3);
         }
         viewPager.setAdapter(adapter);
-        viewPager.setOffscreenPageLimit(3);
 
     }
 

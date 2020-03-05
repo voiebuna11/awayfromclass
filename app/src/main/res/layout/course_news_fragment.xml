@@ -10,7 +10,7 @@
         android:id="@+id/course_list_news_empty"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/search_list_user_empty"
+        android:text="@string/course_news_list_empty"
         android:gravity="center"
         android:visibility="gone"/>
     <androidx.recyclerview.widget.RecyclerView
