@@ -13,7 +13,7 @@ public class Config {
     public static final int NOTIFICATION_ID_BIG_IMAGE = 101;
 
     // link to server files
-    public static final String KEY_LINK = "http://a137d5d8.ngrok.io";
+    public static final String KEY_LINK = "http://05d1d7a5.ngrok.io";
 
     // Sharedpref file name
     public static final String PREF_NAME = "AFCPref";
