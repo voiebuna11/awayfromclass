@@ -1,5 +1,8 @@
 package com.example.afc.activities;
 
+import android.app.Activity;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,8 +22,14 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -30,9 +39,13 @@ import com.example.afc.app.Config;
 import com.example.afc.app.DBManagement;
 import com.example.afc.app.SessionManagement;
 import com.example.afc.chat.ChatLobbyActivity;
+import com.example.afc.course.CourseListActivity;
+import com.example.afc.main.MainActivity;
+import com.example.afc.user.FilesActivity;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 /* This is a Base Activity. Includes features used by multiple activies across the APP */
@@ -53,6 +66,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Activity activity = (Activity) this;
 
         //check session(if user is logged in)
         session = new SessionManagement(getApplicationContext());
@@ -62,7 +76,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         //setup activity layout elements
         setContentView(getLayoutResource());
         configureToolbar();
-        configureSideMenu();
+        configureSideMenu(activity);
         configureSideMenuHeader();
 
         startLoadingBar();
@@ -72,17 +86,21 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
     protected abstract int getLayoutResource();
 
+    protected abstract int getToolbarResource();
+
     //Top menu intialization
     protected void configureToolbar() {
-        toolbar = (Toolbar) findViewById(R.id.top_menu_layout);
+        toolbar = (Toolbar) findViewById(getToolbarResource());
         if (toolbar != null) {
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+        toolbar.setPadding(0,0,0,0);
+        toolbar.setContentInsetsAbsolute(0,0);
     }
 
     //Side menu initialization
-    private void configureSideMenu(){
+    private void configureSideMenu(final Activity activity){
         nv = (NavigationView) findViewById(R.id.side_menu);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
 
@@ -94,22 +112,25 @@ public abstract class BaseActivity extends AppCompatActivity {
         nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
-                Intent intent;
+                Intent intent = null;
+
+                drawerLayout.closeDrawers();
                 switch (menuItem.getItemId()) {
-                    case(R.id.nav_home):
-                        intent = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(intent);
-                        return true;
-                    case(R.id.nav_settings):
-                        return true;
-                    case(R.id.nav_messages):
-                        intent = new Intent(getApplicationContext(), ChatLobbyActivity.class);
-                        startActivity(intent);
-                        return true;
-                    case(R.id.nav_logout):
-                        session.logoutUser();
-                        return true;
+                    case(R.id.nav_home): intent = new Intent(getApplicationContext(), MainActivity.class);
+                        if(activity instanceof MainActivity) return true; break;
+                    case(R.id.nav_messages): intent = new Intent(getApplicationContext(), ChatLobbyActivity.class);
+                        if(activity instanceof ChatLobbyActivity) return true; break;
+                    case(R.id.nav_courses): intent = new Intent(getApplicationContext(), CourseListActivity.class);
+                        if(activity instanceof CourseListActivity) return true; break;
+                    case(R.id.nav_my_files): intent = new Intent(getApplicationContext(), FilesActivity.class);
+                        if(activity instanceof FilesActivity) return true; break;
+                    case(R.id.nav_settings): intent = new Intent(getApplicationContext(), EmptyActivity.class);
+                        if(activity instanceof EmptyActivity) return true; break;
+                    case(R.id.nav_logout): session.logoutUser(); return true;
+                    default:
+                        break;
                 }
+                startActivity(intent);
                 return true;
             }
         });
@@ -176,6 +197,45 @@ public abstract class BaseActivity extends AppCompatActivity {
     public int getRandom(int from, int to){
         Random r = new Random();
         return r.nextInt(to-from) + from;
+    }
+
+    public void copyToClipboard(String text, String label){
+        ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText(label, text);
+        clipboard.setPrimaryClip(clip);
+        alert(getString(R.string.file_list_copy_to_clipboard));
+    }
+
+    //get user files from server
+    public void deleteFileFromServer(final String fileName,final RecyclerView.Adapter adapter) {
+        String url = session.getAFCLink() + "/afc/users/remove_user_file.php";
+        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if(response.equals("success: file_removed")){
+                    alert(getString(R.string.file_list_removed));
+                } else {
+                    alert(response);
+                }
+                adapter.notifyDataSetChanged();
+                stopLoadingBar();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String, String> params = new HashMap<>();
+                params.put("user_id", sessionData.get(Config.KEY_ID)); //parametrii POST
+                params.put("file_name", fileName);
+                return params;
+            }
+        };
+        mQueue.add(request);
     }
 
     @Override

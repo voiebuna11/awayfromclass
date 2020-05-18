@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".course.MembersFragment"
+android:background="@color/chat_typebox_gray">
+<include layout="@layout/loading_bar_layout" android:layout_width="match_parent" android:layout_height="match_parent"/>
+<TextView
+    android:id="@+id/course_enrollment_empty"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:text="@string/search_list_user_empty"
+    android:gravity="center"
+    android:visibility="gone"/>
+<androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/course_enrollment_list"
+    android:focusableInTouchMode="true"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"/>
+</FrameLayout>

@@ -4,6 +4,8 @@
     package="com.example.afc">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -13,9 +15,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".chat.ChatLobbyActivity"/>
+        <activity android:name=".content.AddContentActivity"></activity>
+        <activity android:name=".content.ContentViewActivity" />
+        <activity android:name=".main.SearchListActivity" />
+        <activity android:name=".course.CourseViewActivity" />
+        <activity android:name=".course.AddCourseActivity" />
         <activity
-            android:name=".activities.ProfileActivity"
+            android:name=".user.FilesActivity"
+            android:label="@string/title_activity_files"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".course.CourseListActivity" />
+        <activity android:name=".chat.ChatLobbyActivity" />
+        <activity
+            android:name=".user.ProfileActivity"
             android:label="" />
         <activity android:name=".chat.ChatRoomActivity" />
         <activity android:name=".access.LoadDataActivity">
@@ -29,11 +41,12 @@
             android:name=".access.RegisterActivity"
             android:label="@string/title_activity_register"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".access.LoginActivity" />
-        <!--suppress AndroidDomInspection -->
+        <activity android:name=".access.LoginActivity" /> <!-- suppress AndroidDomInspection -->
         <activity android:name=".activities.BaseActivity" />
         <activity android:name=".activities.EmptyActivity" />
-        <activity android:name=".activities.MainActivity" android:label=""/> <!-- Firebase Notifications -->
+        <activity
+            android:name=".main.MainActivity"
+            android:label="" /> <!-- Firebase Notifications -->
         <service android:name=".services.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

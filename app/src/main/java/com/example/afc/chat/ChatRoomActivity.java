@@ -16,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import androidx.appcompat.widget.Toolbar;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,11 +29,11 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.afc.R;
-import com.example.afc.activities.BaseTransparentActionBarActivity;
-import com.example.afc.activities.ProfileActivity;
+import com.example.afc.activities.BaseTogglelessActivity;
+import com.example.afc.app.NotificationManagement;
+import com.example.afc.user.ProfileActivity;
 import com.example.afc.app.Config;
-import com.example.afc.app.User;
-import com.example.afc.classes.NotificationUtils;
+import com.example.afc.user.User;
 
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
@@ -51,7 +50,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ChatRoomActivity extends BaseTransparentActionBarActivity {
+public class ChatRoomActivity extends BaseTogglelessActivity {
     private ArrayList<Message> mMessageList;
 
     private User mChatPartner;
@@ -67,12 +66,12 @@ public class ChatRoomActivity extends BaseTransparentActionBarActivity {
     private TextView mChatPartnerName;
 
     public BroadcastReceiver mRegistrationBroadcastReceiver;
-    public NotificationUtils notificationUtils;
+    public NotificationManagement notificationManagement;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setToolbar();
+        toolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.colorBackground), PorterDuff.Mode.SRC_ATOP);
 
         mChatPartnerName = (TextView) findViewById(R.id.top_menu_chat_room_name);
         mChatPartnerPic = (ImageView) findViewById(R.id.top_menu_chat_room_pic);
@@ -83,7 +82,7 @@ public class ChatRoomActivity extends BaseTransparentActionBarActivity {
         mChatRecyclerView.setHasFixedSize(true);
 
         mMessageList = new ArrayList<Message>();
-        notificationUtils = new NotificationUtils(getApplicationContext());
+        notificationManagement = new NotificationManagement(getApplicationContext());
 
         //Passed info from last activity
         mChatPartner = (User) getIntent().getSerializableExtra("EXTRA_USER");
@@ -253,7 +252,7 @@ public class ChatRoomActivity extends BaseTransparentActionBarActivity {
         sendMessageToServer(mChatPartner.getId(), sessionData.get(Config.KEY_ID), message, timestamp);
 
         //clear message box
-        notificationUtils.playMessageSound();
+        notificationManagement.playMessageSound();
         mMessageBox.setText("");
     }
 
@@ -353,16 +352,6 @@ public class ChatRoomActivity extends BaseTransparentActionBarActivity {
         scrollToBottom();
     }
 
-    private void setToolbar(){
-        toolbar = (Toolbar) findViewById(R.id.top_menu_chat_room_layout);
-        if (toolbar != null) {
-            setSupportActionBar(toolbar);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            //change color of home button
-            toolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.colorBackground), PorterDuff.Mode.SRC_ATOP);
-        }
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -398,6 +387,11 @@ public class ChatRoomActivity extends BaseTransparentActionBarActivity {
     }
 
     @Override
+    public int getToolbarResource() {
+        return R.id.top_menu_chat_room_layout;
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
 
@@ -411,7 +405,7 @@ public class ChatRoomActivity extends BaseTransparentActionBarActivity {
                 new IntentFilter(Config.CHAT_MESSAGE));
 
         // clear the notification area when the app is opened
-        NotificationUtils.clearNotifications(getApplicationContext());
+        NotificationManagement.clearNotifications(getApplicationContext());
     }
 
     @Override

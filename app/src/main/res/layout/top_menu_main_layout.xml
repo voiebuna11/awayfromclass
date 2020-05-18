@@ -21,13 +21,13 @@
         android:paddingRight="15dp"
         android:paddingLeft="15dp"
         android:gravity="center_vertical"
-        android:background="@drawable/semi_round_frame_layout"
+        android:background="@drawable/semi_round_white_layout"
         android:orientation="horizontal">
         <com.example.afc.classes.CustomDrawerButton
             android:id="@+id/main_toggle_btn"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:background="@drawable/ic_menu_toggle"/>
+            android:background="@drawable/ic_search_dialog_toggle"/>
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -37,19 +37,21 @@
             android:textColor="@color/colorDefaultMenuGrayLight"
             android:maxLines="1"
             android:text="@string/app_name"
-            android:fontFamily="@font/futuramediumbt"
+            android:fontFamily="@font/francoisone"
             android:textStyle="bold"
-            android:textSize="19sp"
+            android:textSize="16sp"
             android:hint="@string/topmenu_search_hint"
             android:background="@android:color/transparent"
             android:onClick="showSearchDialog"
             android:layout_weight="1"/>
+
         <com.example.afc.classes.CustomDrawerButton
             android:id="@+id/main_record_btn"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_gravity="right"
             android:background="@drawable/ic_menu_microphone"/>
+
     </LinearLayout>
 
 </androidx.appcompat.widget.Toolbar>

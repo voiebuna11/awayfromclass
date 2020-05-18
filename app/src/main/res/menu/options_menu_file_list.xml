@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/fl_preview"
+        android:title="@string/options_menu_fl_preview" />
+    <item
+        android:id="@+id/fl_rename"
+        android:title="@string/options_menu_fl_rename" />
+    <item
+        android:id="@+id/fl_copy_link"
+        android:title="@string/options_menu_fl_copy_link" />
+    <item
+        android:id="@+id/fl_download"
+        android:title="@string/options_menu_fl_download" />
+    <item
+        android:id="@+id/fl_remove"
+        android:title="@string/options_menu_fl_remove" />
+</menu>

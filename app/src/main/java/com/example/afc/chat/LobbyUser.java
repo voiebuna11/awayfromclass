@@ -1,6 +1,6 @@
 package com.example.afc.chat;
 
-import com.example.afc.app.User;
+import com.example.afc.user.User;
 
 public class LobbyUser {
     private User user;

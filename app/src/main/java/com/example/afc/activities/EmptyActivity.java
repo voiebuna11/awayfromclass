@@ -26,4 +26,7 @@ public class EmptyActivity extends BaseActivity {
     public int getLayoutResource() {
         return R.layout.activity_empty;
     }
+
+    @Override
+    public int getToolbarResource() { return R.id.top_menu_layout; }
 }

@@ -14,7 +14,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.afc.access.LoginActivity;
-import com.example.afc.activities.MainActivity;
+import com.example.afc.main.MainActivity;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -130,7 +130,7 @@ public class SessionManagement {
     public void registerToFirebase(final String token, final String clearToken) {
         RequestQueue mQueue =  Volley.newRequestQueue(_context);
         final HashMap<String, String> user = getUserDetails();
-        String url = getAFCLink() + "/afc/user/set_user_fcm.php";
+        String url = getAFCLink() + "/afc/users/set_user_fcm.php";
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

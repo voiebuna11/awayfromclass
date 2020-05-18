@@ -1,29 +1,34 @@
 package com.example.afc.access;
 
+import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.animation.Animation;
-import android.view.animation.LinearInterpolator;
-import android.view.animation.RotateAnimation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.example.afc.R;
-import com.example.afc.activities.MainActivity;
 import com.example.afc.app.Config;
 import com.example.afc.app.SessionManagement;
+import com.example.afc.main.MainActivity;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
@@ -34,22 +39,22 @@ public class LoadDataActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
     private BroadcastReceiver mRegistrationBroadcastReceiver;
 
+    private int REQUEST_PERMISSION;
 
     private SessionManagement session;
     HashMap<String, String> sessionData;
     private RequestQueue mQueue;
+    Animation mRotateAnimation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_load_data);
 
-        RotateAnimation anim = new RotateAnimation(0f, 350f, 25f, 25f);
-        anim.setInterpolator(new LinearInterpolator());
-        anim.setRepeatCount(Animation.INFINITE);
-        anim.setDuration(700);
+        mRotateAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotation);
+        mRotateAnimation.setRepeatCount(Animation.INFINITE);
         // Start animating the image
         final ImageView splash = (ImageView) findViewById(R.id.loading_pen);
-        splash.startAnimation(anim);
+        splash.startAnimation(mRotateAnimation);
         //getAFCConnectionLink();
 
         mQueue =  Volley.newRequestQueue(getApplicationContext());
@@ -62,6 +67,7 @@ public class LoadDataActivity extends AppCompatActivity {
             @Override
             public void onSuccess(InstanceIdResult instanceIdResult) {
                 String mToken = instanceIdResult.getToken();
+                Log.d(TAG, "TOKEN FOUND: " + mToken);
 
                 SharedPreferences pref = getApplicationContext().getSharedPreferences(Config.PREF_NAME, 0);
                 String regId = pref.getString(Config.KEY_CHAT_ID, null);
@@ -74,16 +80,25 @@ public class LoadDataActivity extends AppCompatActivity {
                     // sending reg id to your server
                     session.registerToFirebase(mToken, "0");
 
-                    Log.e(TAG, "TOKEN REGISTERED: " + mToken);
+                    Log.d(TAG, "TOKEN REGISTERED: " + mToken);
                 }
                 // Notify UI that registration has completed, so the progress indicator can be hidden.
                 Intent registrationComplete = new Intent(Config.REGISTRATION_COMPLETE);
                 registrationComplete.putExtra("token", mToken);
                 LocalBroadcastManager.getInstance(LoadDataActivity.this).sendBroadcast(registrationComplete);
-
-                goToMain();
             }
         });
+        //ask for file managing permission
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            int readPermission = ContextCompat.checkSelfPermission(LoadDataActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE);
+            int writePermission = ContextCompat.checkSelfPermission(LoadDataActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            if (readPermission != PackageManager.PERMISSION_GRANTED || writePermission != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(LoadDataActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        REQUEST_PERMISSION);
+            } else {
+                goToMain();
+            }
+        }
     }
 
     private void goToMain(){
@@ -109,5 +124,19 @@ public class LoadDataActivity extends AppCompatActivity {
             }
         });
         dialog.show();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(final int requestCode, @NonNull final String[] permissions, @NonNull final int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_PERMISSION) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                // Permission granted.
+                goToMain();
+            } else {
+                // User refused to grant permission.
+                finish();
+            }
+        }
     }
 }

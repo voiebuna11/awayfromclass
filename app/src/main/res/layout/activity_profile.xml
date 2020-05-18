@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawerLayout"
-    tools:context=".activities.EmptyActivity">
+    tools:context=".user.ProfileActivity">
     <include layout="@layout/loading_bar_layout" android:layout_width="match_parent" android:layout_height="match_parent"/>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -31,22 +31,23 @@
                         android:layout_height="wrap_content"
                         android:src="@drawable/profile_header_background"
                         android:scaleType="centerCrop" />
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/profile_header_avatar"
+                        android:transitionName="profile_pic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="130dp"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/user_avatar"/>
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_alignBottom="@+id/profile_header_background"
                         android:padding="25dp">
-                        <ImageView
-                            android:id="@+id/profile_header_avatar"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_centerVertical="true"
-                            android:src="@drawable/user_avatar"/>
                         <TextView
                             android:id="@+id/profile_name"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
-                            android:text="Numerele Marcel"
+                            android:text="Lastname Firstname"
                             android:textSize="24sp"
                             android:gravity="center"
                             android:textColor="#fff"/>
@@ -59,31 +60,29 @@
                     android:orientation="vertical">
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/profile_user"
-                        style="@style/ImageButtonBottomBordered"
+                        style="@style/Widget.AppTheme.BorderlessButton"
                         android:drawableLeft="@drawable/ic_btn_user"
                         android:text="username" />
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/profile_phone"
-                        style="@style/ImageButtonBottomBordered"
+                        style="@style/Widget.AppTheme.BorderlessButton"
                         android:drawableLeft="@drawable/ic_btn_phone"
                         android:text="(+40) 0762190393"
-                        android:onClick="callUser"
-                        tools:ignore="OnClick" />
+                        android:onClick="callUser" />
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/profile_email"
-                        style="@style/ImageButtonBottomBordered"
+                        style="@style/Widget.AppTheme.BorderlessButton"
                         android:drawableLeft="@drawable/ic_btn_mail_contact"
                         android:text="aabbbcccc@example.dom"
-                        android:onClick="sendMailUser"
-                        tools:ignore="OnClick" />
+                        android:onClick="sendMailUser"/>
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/profile_city"
-                        style="@style/ImageButtonBottomBordered"
+                        style="@style/Widget.AppTheme.BorderlessButton"
                         android:drawableLeft="@drawable/ic_btn_city"
                         android:text="City / Locality" />
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/profile_group"
-                        style="@style/ImageButtonBottomBordered"
+                        style="@style/Widget.AppTheme.BorderlessButton"
                         android:drawableLeft="@drawable/ic_btn_year"
                         android:text="SPEC X" />
                 </LinearLayout>

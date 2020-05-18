@@ -32,7 +32,6 @@
 
                 android:layout_below="@+id/afc_logo_title"/>
         </RelativeLayout>
-
         <ImageView
             android:id="@+id/afc_logo_image"
             android:layout_width="80dp"

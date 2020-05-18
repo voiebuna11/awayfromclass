@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/drawerLayout"
+    tools:context=".course.CourseListActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <include layout="@layout/top_menu_layout" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+        <include layout="@layout/loading_bar_layout" android:layout_width="match_parent" android:layout_height="match_parent"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/course_list_empty"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/course_list_empty"
+                android:gravity="center"
+                android:visibility="gone"/>
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/course_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </ScrollView>
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/add_new_course"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_marginTop="@dimen/fab_margin"
+                android:layout_marginLeft="@dimen/fab_margin"
+                android:layout_marginRight="@dimen/fab_margin"
+                android:layout_marginBottom="32dp"
+                app:srcCompat="@drawable/nav_course_add"
+                android:backgroundTint="@color/colorPrimary"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                tools:ignore="VectorDrawableCompat" />
+        </RelativeLayout>
+    </LinearLayout>
+    <include layout="@layout/side_menu_layout"/>
+</androidx.drawerlayout.widget.DrawerLayout>

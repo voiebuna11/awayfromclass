@@ -13,6 +13,7 @@ import java.util.HashMap;
 
 import static com.example.afc.app.Config.DB_CHAT_TABLE;
 import static com.example.afc.app.Config.DB_NAME;
+import static com.example.afc.app.Config.DB_SEARCH_HISTORY_TABLE;
 
 public class DBManagement extends SQLiteOpenHelper {
     private HashMap hp;
@@ -26,6 +27,7 @@ public class DBManagement extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + DB_CHAT_TABLE + " (mess_id	INTEGER PRIMARY KEY AUTOINCREMENT, mess_to_id INTEGER, mess_from_id INTEGER, mess_text TEXT, mess_date DATE);");
+        db.execSQL("CREATE TABLE " + DB_SEARCH_HISTORY_TABLE + " (search_id INTEGER PRIMARY KEY AUTOINCREMENT, search_text TEXT UNIQUE);");
     }
 
     @Override
@@ -40,6 +42,16 @@ public class DBManagement extends SQLiteOpenHelper {
         contentValues.put("mess_text", text);
         contentValues.put("mess_date", date);
         db.insert(DB_CHAT_TABLE, null, contentValues);
+        return true;
+    }
+
+    public boolean insertSearch(String text){
+        text = text.trim();
+        if(text.length()==0) return true;
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("search_text", text);
+        db.replace(DB_SEARCH_HISTORY_TABLE, null, contentValues);
         return true;
     }
 
@@ -61,6 +73,21 @@ public class DBManagement extends SQLiteOpenHelper {
                     res.getString(res.getColumnIndex("mess_date"))
             ));
             res.moveToNext();
+        }
+        return mList;
+    }
+
+    public ArrayList<String> getSearchHistory(String text) {
+        ArrayList<String> mList = new ArrayList<String>();
+        Cursor res =  db.rawQuery( "select * from "+DB_SEARCH_HISTORY_TABLE+" where search_text LIKE '%"+ text +
+                        "%' order by search_id desc limit 4",
+                null );
+        if(res.getCount() > 0){
+            res.moveToFirst();
+            while(res.isAfterLast() == false){
+                mList.add(res.getString(res.getColumnIndex("search_text")));
+                res.moveToNext();
+            }
         }
         return mList;
     }

@@ -6,11 +6,6 @@
     <string name="user_prof">Profesor</string>
 
     <string name="app_intent_mail">Trimite mail</string>
-    <string-array name="query_suggestions">
-        <item>Android</item>
-        <item>iOS</item>
-        <item>SCALA</item>
-    </string-array>
 
     <string name="sidemenu_open">Open</string>
     <string name="sidemenu_close">Close</string>
@@ -22,7 +17,11 @@
     <string name="sidemenu_settings">Set&#259;ri</string>
     <string name="sidemenu_logout">Deconectare</string>
 
-    <string name="topmenu_search_hint">C&#259;uta&#539;i &#238;n Away From Class</string>
+    <string name="options_menu_fl_preview">Previzualiza&#539;i</string>
+    <string name="options_menu_fl_download">Desc&#259;rca&#539;i</string>
+    <string name="options_menu_fl_rename">Redenumiti&#539;i</string>
+    <string name="options_menu_fl_remove">Elimina&#539;i</string>
+    <string name="options_menu_fl_copy_link">Copia&#539;i linkul</string>
 
     <string name="progress_loading">Se &#238;ncarc&#259;..</string>
     <string name="progress_login">Autentificare..</string>
@@ -42,6 +41,7 @@
     <string name="alert_regex_phone_message">Num&#259;rul de telefon poate con&#539;ine doar cifre.</string>
     <string name="alert_regex_year_message">Anul de studiu poate con&#539;ine doar o cifr&#259;.</string>
     <string name="alert_regex_spec_message">Specializarea poate con&#539;ine doar minim 3 litere.</string>
+    <string name="alert_regex_course_name_message">Numele de cursului poate con&#539;ine doar litere &#537;i spa&#539;ii. Minim 5 caractere.</string>
     <string name="alert_button_tryagain">&#206;ncearc&#259; din nou</string>
     <string name="alert_button_ok">Ok</string>
 
@@ -70,5 +70,78 @@
     <string name="chat_room_write_message">Scrie un mesaj...</string>
 
     <string name="chat_lobby_empty">Nu s-a g&#259;sit nici o conversa&#539;ie deschis&#259;.</string>
+
+    <string name="main_last_title">Utilizatori noi</string>
+    <string name="main_last_subtitle">Cele mai recente &#238;nregistr&#259;ri</string>
+
+    <string name="course_enrollment_request">Cererea de &#238;nscriere a fost &#238;nregistrat&#259;</string>
+    <string name="course_enrollment_accepted_req">Cererea de &#238;nscriere a fost acceptat&#259;</string>
+    <string name="course_enrollment_denied_req">Cererea de &#238;nscriere a fost refuzat&#259;</string>
+    <string name="course_list_empty">Nu s-a g&#259;sit nici un curs.</string>
+
+    <string name="course_content_list_empty">Nu s-a g&#259;sit nici un con&#539;inut ad&#259;ugat.</string>
+    <string name="course_news_list_empty">Nu s-a g&#259;sit nici o noutate despre curs.</string>
+
+    <string name="course_add_title">Curs nou</string>
+    <string name="course_add_name">Nume</string>
+    <string name="course_add_description">Descriere</string>
+    <string name="course_add_btn">Creeaz&#259; cursul</string>
+    <string name="course_add_already">Numele cursului este folosit deja!</string>
+    <string name="course_add_success">Cursul a fost creat cu succes!</string>
+
+    <string name="content_add_title">Con&#539;inut nou</string>
+    <string name="content_add_name">Nume</string>
+    <string name="content_add_description">Descriere</string>
+    <string name="content_add_btn">Adaug&#259; con&#539;inutul</string>
+    <string name="content_add_already">Numele con&#539;inutului este folosit deja!</string>
+    <string name="content_add_success">Con&#539;inutul a fost ad&#259;ugat cu succes!</string>
+
+    <string name="course_view_content_title">Con&#539;inut</string>
+    <string name="course_view_news_title">Nout&#259;&#539;i</string>
+    <string name="course_view_participants_title">Participan&#539;i</string>
+    <string name="course_view_enroll_requests_title">Cereri de &#238;nscriere</string>
+
+    <string name="course_event_course_creation">a creat cursul.</string>
+    <string name="course_event_course_edit">a schimbat datele din descrierea cursului.</string>
+    <string name="course_event_course_removed">a &#537;ters cursul.</string>
+    <string name="course_event_enroll_pending"> a trimis o cerere de &#238;nscriere la curs.</string>
+    <string name="course_event_enroll_accepted">a acceptat cererea de &#238;nscriere a lui</string>
+    <string name="course_event_enroll_rejected">a refuzat cererea de &#238;nscriere a lui</string>
+    <string name="course_event_file_added"> a ad&#259;ugat un fi&#537;ier nou &#238;n</string>
+    <string name="course_event_file_removed">a &#537;ters fi&#537;ierul</string>
+    <string name="course_event_content_creation">a ad&#259;ugat un con&#539;inut nou la curs sub denumirea de</string>
+    <string name="course_event_content_edit">a schimbat datele din descrierea con&#539;inutului </string>
+    <string name="course_event_content_removed">a &#537;ters un con&#539;inut legat de acest curs.</string>
+
+    <string name="search_user_title">Utilizatori</string>
+    <string name="search_courses_title">Cursuri</string>
+    <string name="search_list_user_empty">Nu s-a g&#259;sit nici un utilizator</string>
+    <string name="search_list_course_empty">Nu s-a g&#259;sit nici un curs</string>
+    <string name="topmenu_search_hint">C&#259;uta&#539;i &#238;n Away From Class</string>
+
+    <string name="file_list_title">Fi&#537;ierele mele</string>
+    <string name="file_list_empty">Nu s-a g&#259;sit nici un fi&#537;ier &#238;nc&#259;rcat</string>
+    <string name="file_list_uploading">Se salveaz&#259;...</string>
+    <string name="file_list_uploading_success">Fi&#537;ierul a fost salvat cu succes</string>
+    <string name="file_list_not_found">Fi&#537;ierul nu a fost g&#259;sit</string>
+    <string name="file_list_source_not_found">Fi&#537;ierul surs&#259; nu exist&#259;</string>
+    <string name="file_list_not_sent">Fi&#537;ierul nu s-a trimis la server</string>
+    <string name="file_list_wrong_url">Serverul nu exist&#259; sau este indisponibil</string>
+    <string name="file_list_wrong_format">Fi&#537;ierul este inaccesibil</string>
+    <string name="file_list_last_modified">Ultima modificare</string>
+    <string name="file_list_download_success">Fi&#537;ierul s-a desc&#259;rcat cu succes</string>
+    <string name="file_list_download_fail">Eroare la desc&#259;rcare</string>
+    <string name="file_list_directory_fail">Eroare la crearea directorului AFC</string>
+    <string name="file_list_copy_to_clipboard">Linkul a fost copiat &#238;n clipboard</string>
+    <string name="file_list_removed">Fi&#537;ier &#537;ters</string>
+
     <string name="inter_dot">&#183;</string>
+    <string name="title_activity_files">ActivityFiles</string>
+
+    <string name="general_term_today">Ast&#259;zi</string>
+    <string name="general_term_yesterday">Ieri</string>
+    <string name="general_term_accept">Accept&#259;</string>
+    <string name="general_term_deny">Refuz&#259;</string>
+    <string name="general_term_from">din</string>
+    <string name="general_term_pressing_on_here">apas&#226;nd aici</string>
 </resources>
